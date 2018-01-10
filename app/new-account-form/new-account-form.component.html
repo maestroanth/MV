@@ -1,0 +1,50 @@
+﻿<div class="new-account transparent-layer">
+  <h4 style="text-align: center; margin-top: 30px;">
+    {{title}}
+  </h4>
+  <br />
+  <div style="text-align: center;">
+    <input type="hidden" name="_token" value="M0ev1b4dWs6hSGEHXBWTTJYwmdfLrWWi0nfzdGuR">
+    <div class="row">
+      <div class="col-md-6">
+        <h6 tooltip="This is just like a username" style="margin-top: 30px; cursor: default; margin-bottom: 30px;">Choose your Sage Name </h6>
+        <input [(ngModel)]="sageRequest.sagename" (keyup)="0" placeholder="Sage Name" tabindex="1">
+        <h5 style="margin-top: 10px;">-- {{sageRequest.sagename}} --</h5>
+        <h6 style="margin-top: 30px; margin-bottom: 30px;">Enter your Full Name </h6>
+        <input [(ngModel)]="sageRequest.realname" (keyup)="0" placeholder="First and Last Name" tabindex="3">
+        <h5 style="margin-top: 10px;">-- {{sageRequest.realname}} --</h5>
+      </div>
+      <!--
+    <label>R
+        e-
+      </div>
+
+
+
+      }}
+      <!--
+    <label>Re-enter your password.</label><br /><br />
+    <input [(ngModel)]="sageAccount.password_confirm" (keyup)="0" type="password" name="password_confirmation" placeholder="Password"><br />
+    <p>-- {{sageRequest.password_confirm}} --</p><br />
+        -->
+
+      <div class="col-md-6">
+        <h6 style="margin-top: 30px; margin-bottom: 30px;">Choose your Password</h6>
+        <input [(ngModel)]="sageRequest.password" (keyup)="0" type="password" placeholder="Password" tabindex="2">
+        <h5 style="margin-top: 10px;">-- {{sageRequest.password}} --</h5>
+        <h6 style="margin-top: 30px; margin-bottom: 30px;">Enter your Email Address</h6>
+        <input [(ngModel)]="sageRequest.email" (keyup)="0" placeholder="Email Address" tabindex="4">
+        <h5 style="margin-top: 10px;">-- {{sageRequest.email}} --</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+        <div class="col-md-4" style="margin-top: 30px;">
+          <button type="button" (click)="createNewAccount()">Create Sage Account</button>
+        </div>
+      <div class="col-md-4"></div>
+    </div>
+    <h4 style="margin-top: 30px; -webkit-text-fill-color: lime;">{{response}}</h4>
+    <p style="color: red; -webkit-text-fill-color: red; margin-bottom: 20px; font-size: 1.2em;">{{sageNameError}}</p>
+  </div>
+</div>

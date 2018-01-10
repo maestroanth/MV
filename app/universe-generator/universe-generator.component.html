@@ -1,0 +1,98 @@
+﻿
+<div class="universe-generator">
+  <div style="text-align: center;" class="container" *ngIf="mainForm">
+
+
+    <br /><br /><br /><br />
+    <div class="transparent-layer">
+      <br />
+
+      <h4 style="text-align: center; font-family: Calibri;">Welcome to your Universe Generator</h4>
+      <h5 style="text-decoration: underline; color: gold;">Stage 0: Before The Big Bang</h5><br />
+      <div style="text-align: center;" class="container" *ngIf="stage1Form.showCostFaulty">
+        <h5 style="-webkit-text-fill-color: #ff7500;">Initial Energy Cost: {{this.stage1Form.cost}} </h5><br />
+      </div>
+      <p style="font-family: Quicksand;">
+        Enter in any website's URL to give that initial <span style="-webkit-text-fill-color: yellow; font-style: italic; margin-left: -2px;">spark </span>of energy to your Universe!
+      </p>
+      <label style="margin-left: -7%;">
+        https://
+      </label>
+      <input style="margin-bottom: 30px;" class="inputBox" [(ngModel)]="inputURL" placeholder="Website URL">
+
+      <div style="text-align: center;">
+
+        <h5 class="inputBox2" id="for-first-test" style="margin-bottom: 30px; font-family: Quicksand;"> https://{{inputURL}} </h5>
+        <button type="button" (click)="showData()" [disabled]="buttonToggle">Make My Universe!</button><br /><br />
+      </div>
+      <p style="text-align: center; font-style: italic; font-family:Alegreya;">
+        {{subTitle}}
+      </p>
+      <h5 style="margin-top: 20px; margin-bottom: 20px; color: red; font-weight: bold;">
+        {{response}}{{error | json}}
+      </h5>
+    </div>
+  </div>
+  <app-stage-1-form [stage1Form]="stage1Form" *ngIf ="!mainForm"></app-stage-1-form><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->
+
+    <div style="text-align: center; margin-top: 20px;">
+     
+        <!-- Stage 0 CORS Modal -->
+        <div id="openingModal" class="modal fade" role="document">
+      
+          <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+     
+            <div class="modal-content" style="background: none;">
+          
+                  <div class="transparent-layer-modal">
+                    <div class="row col-md-12 text-right">
+                        <button data-dismiss="modal" class="close x-close" style="">
+                          x
+                        </button>
+                    </div>
+                    <h3>**IMPORTANT CORS NOTE**</h3> <br /><br />
+                    <p>
+                      To get the most out of this generator it is <i>strongly</i> recommended to <b>download one of these extensions</b> for your browser that allows
+                      "Cross-Origin Resource Sharing (CORS)".
+                    </p>
+                    <h5>
+                      Below is a list of links I recommend for some of the most popular browsers:
+                    </h5>
+
+                    <ul style="list-style:none; margin-top: 30px;">
+                      <li>
+                        <h4>
+                          <a href="https://chrome.google.com/webstore/detail/cors-toggle/jioikioepegflmdnbocfhgmpmopmjkim?hl=en" target="_blank">
+                            Chrome
+                          </a>
+                        </h4>
+                      </li>
+                      <li>
+                        <h4>
+                          <a href="https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere" target="_blank">
+                            Firefox
+                          </a>
+                        </h4>
+                      </li>
+                      <li style="color: red; margin-top: 20px;">  <i>(Explorer and Safari is unsupported at this stage.)</i> </li>
+                    </ul>
+                    <br />
+
+                    <p>If you are still getting network errors <i>(press F12 to open dev tools and check under the network tab to look for errors)</i>, please make sure the extension is <i>toggled on</i>!</p>
+                    <p id=CORS (click)="CORSInfoToggle()" style="cursor: pointer;">Click HERE if you want to see the technical explanation.</p>
+                    <br />
+                    <div *ngIf="this.CORSInfo" style="cursor: pointer; -webkit-transform: translate(0, 0);">
+                      <p>
+                        Given the unorthodox use of this Universe Generator's use of 'GET' requests to gather outside HTML for reasons outside of rendering, it is key for CORS to be enabled without triggering
+                        browser pre-flights. Many sites (like www.google.com) will deny certain preflight requests altogether made to pages that are meant solely for HTML rending (Google's Search Homepage for example).
+                      </p>
+                      <p><i style="color: yellow; margin-top: 10px;">Using the browser extension simply enables CORS without triggering pre-flight requests within the browser.</i></p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        <br /><br />
+      </div>
+</div>
+
+

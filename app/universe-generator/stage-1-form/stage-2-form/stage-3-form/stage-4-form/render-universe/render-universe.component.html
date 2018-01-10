@@ -1,0 +1,57 @@
+﻿<div class="render-universe">
+  <div style="text-align: center;" class="container transparent-layer" *ngIf="renderUniverseForm.showForm">
+    <br /><br />
+    <div id="openingModal5" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <div class="row col-md-12 text-right">
+                <button data-dismiss="modal" class="close x-close" style="">
+                  x
+                </button>
+            </div>
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <h2 style="margin-bottom: 30px;">
+              "Congratulations Sage of the Multiverse! Look below to gaze upon the Majesty of your new Creation!"
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+
+
+    <h5>Stage 5: The Moment of Creation!</h5>
+
+    <h3 style="margin-bottom: 80px; margin-top: 30px;"> {{renderUniverseForm.universeCard.name}}</h3>
+    <h6 style="font-style: italic; font-size: 1.6em; margin-bottom: 80px;"> Created By: Sage {{renderUniverseForm.universeCard.Created_By}}</h6>
+    <h4 style="margin-bottom: 40px;">Description</h4>
+    <p style="font-style: italic;">"{{renderUniverseForm.universeCard.description}}"</p>
+    <br /><br />
+    <h4> The Forces </h4><br />
+    <h6>{{renderUniverseForm.universeCard.Force_Name_1}}: {{renderUniverseForm.universeCard.Strength_Force_1}}</h6>
+    <h6>{{renderUniverseForm.universeCard.Force_Name_2}}: {{renderUniverseForm.universeCard.Strength_Force_2}}</h6>
+    <h6>{{renderUniverseForm.universeCard.Force_Name_3}}: {{renderUniverseForm.universeCard.Strength_Force_3}}</h6>
+
+    <br />
+    <h4> The Conceptual </h4><br />
+    <h6>{{renderUniverseForm.universeCard.Concept_Name_1}}: {{renderUniverseForm.universeCard.Strength_Concept_1}}</h6>
+    <h6>{{renderUniverseForm.universeCard.Concept_Name_2}}: {{renderUniverseForm.universeCard.Strength_Concept_2}}</h6>
+    <h6>{{renderUniverseForm.universeCard.Concept_Name_3}}: {{renderUniverseForm.universeCard.Strength_Concept_3}}</h6>
+    <br />
+    <h4> The Phenomena (Your Moves) </h4><br />
+    <h6>{{this.moveName[1]}}: Buff Level {{renderUniverseForm.universeCard.Move1_Buff_Tally}}</h6>
+    <h6>{{this.moveName[2]}}: Buff Level {{renderUniverseForm.universeCard.Move2_Buff_Tally}}</h6>
+    <h6>{{this.moveName[3]}}: Buff Level {{renderUniverseForm.universeCard.Move3_Buff_Tally}}</h6>
+    <h6>{{this.moveName[4]}}: Buff Level {{renderUniverseForm.universeCard.Move4_Buff_Tally}}</h6>
+    <p style="font-weight: bold; color: goldenrod; margin-top: 40px;" *ngIf="moveUltimate">Ultimate --- {{this.moveName[5]}}: Buff Level {{renderUniverseForm.universeCard.MoveUltimate_Buff_Tally}}</p>
+
+    <h5 style="margin-bottom: 20px; margin-top: 50px;"> Estimated Energy Value: {{renderUniverseForm.universeCard.Energy_Value}} </h5>
+    <h4 style="margin-bottom: 20px; margin-top: 50px;"> Original Universe Model</h4>
+    <h3 style="margin-bottom: 50px; margin-top: 20px;">
+      {{universeCategory.name}}
+    </h3>
+
+    <p style="font-weight: bold; color: yellow;" ><i>(Click any of the four logos in the corner to be redirected back to the homepage)</i></p>
+  </div>
+</div>

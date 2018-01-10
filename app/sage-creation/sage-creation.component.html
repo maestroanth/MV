@@ -1,0 +1,179 @@
+﻿<div class="sage-creation transparent-layer" style="text-align: center; margin-top: 30px;">
+
+    <div id="openingModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <div class="row col-md-12 text-right">
+                <button data-dismiss="modal" class="close x-close" style="">
+                  x
+                </button>
+            </div>
+            <h4 style="color: lime; font-size: 2em;">The Multiverse says to you,</h4> <br /><br />
+            <p>
+              "My Dear Lord, since you are just a lowly human mortal living in only 4 dimensions, most of these pictures I now show you are just very poor 
+              approximations of what these higher dimensional beings would look like in your primitive 4 dimensionality (Well, 3 not counting time, and 2 since you 
+              are most likely viewing this from a "flat" screen). Point being, since I am working against this significant handicap, I have added my own adjustments 
+              to help 
+              you relate to these pictures easier. In other words, I have taken the liberty to re-shape most of these Sages into a humanoid shape. 
+              Just remember, humanoid is not the true shape of 
+              most of these Sages!  Irregardless, you need to find a race and image that you would like to represent your presence here in the Multiverse."
+            </p>
+            <br />
+            <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+              - Directions: Simply use the left and right arrows to browse through the races and images available.  With some races, you are allowed to spend
+              extra bonus points to your attributes to fine-tune your powers according to the six <i>In's</i> important to Multiverse Sages.  Many races 
+              (particularly the more difficult races) will be available to play once unlocked.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="infoRaceModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+      <div class="modal-content" style="background: none;">
+        <div class="transparent-layer-modal">
+          <h4 style="">{{race.race_name}}</h4> <br /><br />
+          <p>
+              {{race.description}}
+          </p>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dimensionalityDescriptionModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+      <div class="modal-content" style="background: none;">
+        <div class="transparent-layer-modal">
+          <h4 style="">About Dimensionality...</h4> <br /><br />
+          <p>
+            {{tipDimensionalWake}}
+          </p>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 30px;">
+
+    <div class="col-md-4 create-section-swap" style="margin-top: 17%;">
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="intuitionUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('intuitionUp')"></i>
+        <h2 class="noselect" tooltip={{tipIntuition}} placement="top" style="cursor:default;">
+          Intuition: {{race.base_intuition}}
+        </h2>
+        <i id="intuitionDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('intuitionDown')"></i>
+      </div>
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="ingenuityUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('ingenuityUp')"></i>
+        <h2 class="noselect" tooltip={{tipIngenuity}} placement="top" style="cursor:default;">
+          Ingenuity: {{race.base_ingenuity}}
+        </h2>
+        <i id="ingenuityDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('ingenuityDown')"></i>
+      </div>
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="inquisitivenessUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('inquisitivenessUp')"></i>
+        <h2 class="noselect" tooltip={{tipInquisitiveness}} placement="top" style="cursor:default;">
+          Inquisitiveness: {{race.base_inquisition}}
+        </h2>
+        <i id="inquisitivenessDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('inquisitivenessDown')"></i>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 create-title-swap">
+      <h5 style="text-align: center; white-space: normal;">
+        Create Your Sage of the Multiverse
+      </h5>
+
+      <h4 style="text-align: center; margin-top: 50px; margin-bottom: 30px; ">
+        Choose Your Race
+      </h4>
+
+      <div class="row" style="color: lime; text-align: center; margin-top: 0; margin-bottom: 40px; padding-top: 0; display: -webkit-inline-box;">
+        <i id="raceUp" class="fa fa-chevron-left fa-stack" aria-hidden="true" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="previousRace()"></i>
+        <h1 (click)="toggleRaceDescription()" style="text-align: center; cursor: pointer; margin-left: 20px; margin-right: 20px;">
+          {{race.race_name}}
+        </h1>
+        <i id="raceDown" class="fa fa-chevron-right fa-stack" aria-hidden="true" style="cursor: pointer; color: lime;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="nextRace()"></i>
+      </div>
+
+      <div style="margin-bottom: 40px;">
+        <h5 class="noselect" tooltip={{tipBonusPointsAtCreation}} placement="top" style="cursor:default; margin-bottom: 10px;">Attribute Points Left To Assign</h5>
+        <h5>{{race.bonus_points_at_creation}}</h5>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <img tooltip={{race.racial_bonuses}} (click)="toggleRaceDescription()" style="border: solid .2vw; border-color: white; cursor: pointer; border-radius: 2vw; width: 14vw;" class="picture" src={{imageURL}} alt="Sorry, problem loading image....">
+      </div>
+      <h4 style="color: red; -webkit-text-fill-color: red;" *ngIf="race.is_locked=='1'">Sorry, you cannot play as this race at this time.</h4>
+      <div class="row change-image-creation" style="color: lime; text-align: center; margin-top: 0; margin-bottom: 20px; padding-top: 0; margin-top: 20px; display: -webkit-inline-box;">
+        <i id="picUp" class="fa fa-chevron-left fa-stack" aria-hidden="true" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="previousImage()"></i>
+        <h1  style="text-align: center; cursor: default; margin-left: 20px; margin-right: 20px;">
+          Change Image
+        </h1>
+        <i id="picDown" class="fa fa-chevron-right fa-stack" aria-hidden="true" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="nextImage()"></i>
+      </div>
+      <h1 (click)="toggleDimensionalityDescription()" style="text-align: center; cursor: pointer; margin-bottom: 20px; font-size: 1.2em; white-space: normal;">
+        {{race.race_name}}'s Are {{race.dimensional_wake}} Dimensional Beings
+      </h1>
+      <div style="margin-bottom: 20px;">
+        <button type="button" (click)="confirm()" [disabled]="!isValid">Confirm</button>
+      </div>
+    </div>
+
+    <div class="col-md-4" style="margin-top: 17%;">
+
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="intelligenceUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('intelligenceUp')"></i>
+        <h2 class="noselect" tooltip={{tipIntelligence}} placement="top" style="cursor:default;">
+          Intelligence: {{race.base_intelligence}}
+        </h2>
+        <i id="intelligenceDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('intelligenceDown')"></i>
+      </div>
+
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="invigorationUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('invigorationUp')"></i>
+        <h2 class="noselect" tooltip={{tipInvigoration}} placement="top" style="cursor:default;">
+          Invigoration: {{race.base_invigoration}}
+        </h2>
+        <i id="invigorationDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('invigorationDown')"></i>
+      </div>
+
+      <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+        <i id="insanityControlUp" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('insanityControlUp')"></i>
+        <h2 class="noselect" tooltip={{tipInsanityControl}} placement="top" style="cursor:default;">
+          Insanity Control: {{race.base_insanity_control}}
+        </h2>
+        <i id="insanityControlDown" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('insanityControlDown')"></i>
+      </div>
+
+      <br />
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div style="text-align: center; margin-top: -3em;">
+    <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal-error">
+            <div class="row col-md-12 text-right">
+                <button data-dismiss="modal" class="close x-close" style="">
+                  x
+                </button>
+            </div>
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <p style="font-style:italic; margin-top:-20px;">
+              {{errorModalMessage}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>

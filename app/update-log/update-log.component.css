@@ -1,0 +1,44 @@
+﻿
+p {
+  color: deepskyblue;
+  -webkit-text-fill-color: deepskyblue;
+  font-family: monospace;
+  font-size: 1vw;
+  text-align: center;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+}
+
+.transparent-layer {
+  border-radius: 2vw;
+  border: solid 1vw #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  border: 1vw solid rgba(0, 0, 0, 1);
+  padding-left: 3vw;
+  min-height: 44vw;
+  padding-right: 3vw;
+  padding-bottom: 2vw;
+  margin-top: 1vw;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
+  max-width: 90vw;
+}
+
+h4 {
+  color: yellow;
+  -webkit-text-fill-color: yellow;
+  margin-bottom: 2vw;
+  font-size: 2.4vw;
+  font-weight: 700;
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+}
+
+h5 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+  font-weight: 700;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}

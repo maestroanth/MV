@@ -1,0 +1,40 @@
+﻿
+<div class="sage-home transparent-layer">
+  <h4 style="text-align: center; margin-top: 2.1vw; font-size: 1.6em;">
+    The Multiverse says to you,
+  </h4>
+    <h6 style="text-align: center; margin-top: 2.1vw; font-size: 1.6em; margin-bottom: 2.1vw;">
+      "{{title}}"
+    </h6>
+
+  <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em; text-align: center; margin-bottom: 2.5vw;">
+    - Directions: If you have not created your Sage profile yet, you must do so before
+    other options become available. A quickstart guide is also available under the "About SOMV" section.
+  </p>
+
+    <div style="text-align: center;">
+      <button type="button" (click)="navigateToUniverseGenerator()" routerLinkActive="active" [disabled]="buttonToggle">Generate New Universes</button>
+      <button type="button" (click)="navigateToSageCreation()" routerLinkActive="active" *ngIf="buttonToggle">Create Your Sage!</button>
+      <button type="button" (click)="navigateToSageProfile()" routerLinkActive="active" *ngIf="!buttonToggle">View Sage Profile</button>
+      <button type="button" (click)="navigateToCardCollection()" routerLinkActive="active" [disabled]="buttonToggle">Manage Multiverse Collection</button>
+      <p></p>
+      <button type="button" (click)="navigateToSettings()" routerLinkActive="active" [disabled]="!isValid">Trade Universes With Other Sages</button>
+      <button type="button" (click)="navigateToPvp()" routerLinkActive="active" [disabled]="buttonToggle">Duel for the Multiverse (PVP Mode)</button>
+      <p></p>
+      <button type="button" (click)="navigateToPurchase()" routerLinkActive="active">Buy Energy (Support Developer)</button>
+      <p></p>
+      <h4 style="color: forestgreen">{{response}}</h4>
+      <p></p>
+      <button type="button" (click)="logout()" routerLink="/welcome" routerLinkActive="active">Logout</button>
+      <button type="button" (click)="navigateToSettings()" routerLinkActive="active">Account Settings</button>
+      <button type="button" (click)="navigateToAbout()">About SOMV</button>
+      <button type="button" (click)="navigateToLog()">Developer Log</button>
+      <br /><br /><br />
+      <h4 style="font-size: 1.0em"><i>(Hint: Click any of the four SOMV logos in the corners to be redirected back to the homepage at any time)</i></h4>
+      <br />
+      <!--
+      <h5 style="font-style: italic; color: blue;margin: 40px;">*Disclaimer: This app is functioning without any styling for the sake of having something to show. I intend to have
+      a more stylized rough-draft of this app up soon!!! Thank you for viewing my work in progress. - Anthony Walter (Programmer/Creator)</h5>
+          -->
+    </div>
+</div>

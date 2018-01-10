@@ -1,0 +1,29 @@
+﻿<div class="account-settings transparent-layer">
+  <div style="text-align: center; margin-top: 40px;">
+    <h4>{{title}}</h4>
+    <h3>{{subTitle}}</h3>
+    <h3>{{subTitle3}}</h3>
+    <h6>{{energyMessage}}</h6>
+  </div>
+  <br />
+  <div style="text-align: center;">
+      <h4 style="margin-bottom: 30px; -webkit-text-fill-color: white;"> You reply, "Dear Multiverse, I would like to change my:</h4>
+      <div class="row" style="margin-bottom: 40px; margin-top: 70px;">
+        <div class="col-md-3">
+          <button type="button" (click)="updateSageName()">Sage Name</button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" (click)="updatePassword()">Password</button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" (click)="updateRealName()">Real Name</button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" (click)="updateEmail()">Email Address</button>
+        </div>
+      </div>
+    <h6 style="color: red; -webkit-text-fill-color: red; font-size: 1.2em; margin-bottom: 30px;">{{sageNameWarning}}</h6>
+    <app-account-change-form [subForm]="subForm"></app-account-change-form><!--Remember to bind @input shit here too for child components-->
+    <button type="button" (click)="delete()">Delete Account</button>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87258719-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-87258719-2');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="description" content="The Universe Trading Card App">
+  <meta name="keywords" content="Multiverse, Universe, Sage, physics, metaphysics, philsophy, cosmology, astronomy, astro, strange, incredible, science, scientific, card, cards, trading, game, app, free, fun">
+  <meta name="author" content="Anthony Walter">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOMV: Universe Generator</title>
+  <base href="/"><!--this sets the base routing or navigation for routing-->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Russo One|Quicksand:700|Alegreya">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <app-root>Loading...</app-root>
+</body>
+</html>
+
+<script>
+  function mouseDown(id) {
+    document.getElementById(id).style.color = "white";
+  }
+
+  function mouseUp(id) {
+    document.getElementById(id).style.color = "lime";
+  }
+
+
+</script>
+
+<script>
+  $(document).bind('mobileinit', function () {
+    $.mobile.changePage.defaults.changeHash = false;
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
+  });
+</script> 
+<script type="text/javascript">
+  $(document).ready(function () {
+  let slideIndex = 0;
+  carousel();
+
+  function carousel() {
+    let i;
+    let x = document.getElementsByClassName("mySlides");
+
+    for (i = 0; i < x.length; i++) {
+      x[i].classList.remove("active");
+    }
+    slideIndex++;
+    if (slideIndex > x.length) { slideIndex = 1 }
+    x[slideIndex - 1].classList.add("active");
+    setTimeout(carousel, 16000); // Change image every 1.6 seconds
+  }
+  });
+  /*
+  $(document).ready(function () {
+    function reorient(e) {
+      var portrait = (window.orientation % 180 == 0);
+      $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
+    }
+    window.onorientationchange = reorient;
+    window.setTimeout(reorient, 0);
+  });
+  */
+
+  $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+    history.pushState(null, null, urlReplace); // push state that hash into the url
+  });
+
+  // If a pushstate has previously happened and the back button is clicked, hide any modals.
+  $(window).on('popstate', function () {
+    $(".modal").modal('hide');
+  });
+</script>
+

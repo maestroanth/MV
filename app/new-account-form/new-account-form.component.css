@@ -1,0 +1,155 @@
+﻿.anil {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all 1s linear; /*opening speed*/
+  -o-transition: all 1s linear; /*opening speed*/
+  transition: all 1s linear; /*opening speed*/
+}
+
+  .anil.in {
+    opacity: 1;
+    transform: scale(1); /*size of the div to scal after .in class attached on opening modal*/
+  }
+
+.modal {
+  top: 5% !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+#CORS:hover {
+  color: yellow;
+}
+
+
+p {
+  color: white;
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.0px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.inputBox {
+  color: black;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.inputBox2 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+}
+
+.transparent-layer {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  border: 10px solid rgba(0, 0, 0, 1);
+  padding-left: 60px;
+  min-height: 33em;
+  padding-right: 60px;
+  padding-bottom: 20px;
+  margin-top: 7%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.transparent-layer-modal {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 10%;
+  margin-left: 10%;
+  padding: 20px;
+  width: 80%;
+}
+
+h2 {
+  color: white;
+  font-size: 3.0em;
+  font-weight: 700;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+}
+
+h3 {
+  color: white;
+  font-size: 2.5em;
+  font-weight: 800;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+h4 {
+  color: yellow;
+  -webkit-text-fill-color: yellow;
+  margin-bottom: 10px;
+  font-size: 2em;
+  font-weight: 700;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+h6 {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 800;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+h5 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+  font-weight: 700;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.universe-generator {
+  padding: 5%;
+  padding-top: 0%;
+  margin-top: -4%;
+}
+
+.fa-spinner {
+  color: white;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+small {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}

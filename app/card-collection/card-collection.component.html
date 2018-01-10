@@ -1,0 +1,230 @@
+﻿<div class="card-collection container" style="max-width: 79vw; margin-left: 2vw;">
+
+  <div *ngIf="noUniverseToggle" class="col-md-12 center transparent-layer no-universes" style="text-align: center; -webkit-text-stroke-width: .4px;
+  -webkit-text-stroke-color: white; -webkit-text-fill-color: white; margin-left: 23vw; margin-top: 8vw; padding: 3vw; width: 48vw;">
+    <h4 style="margin-top: 4vw; margin-bottom: 4vw;">The Multiverse says to you...</h4>
+    <p>
+      "Dear Sage, I regret to inform you that your Multiverse is empty!  Please head on over to the <i (click)="toGenerator()" style="cursor: pointer; -webkit-text-fill-color: deepskyblue; font-weight: 700;">Universe Generator</i> to start creating Universes to grow
+      your collection."
+    </p>
+
+  </div>
+  <div id="scroll" class="row">
+    <div class="toggleFlex" style="display: inline-flex;">
+      <div *ngFor="let card of cards; let i = index" class="universe-spread">
+        <h3 class="title-bubble-one" *ngIf="!noUniverseToggle">{{card.name}}</h3>
+        <svg class="bubble-one">
+          <circle (click)="cueCardModal(i)" cx="9.8vw" cy="9.8vw" r="9.8vw" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="row horzontal-nav-buttons" *ngIf="!noUniverseToggle">
+    <button [disabled]="!ifScrollBar " (mousedown)="left()"> Jump Left </button>
+    <button [disabled]="!ifScrollBar " (mousedown)="right()" style="margin-left: 8vw;"> Jump Right </button>
+  </div>
+</div>
+
+
+<!-- Are You Sure Card Modal -->
+
+<div id="areYouSureModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 9999; text-align: center;">
+  <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+    <div class="modal-content" style="background: none;">
+      <div class="transparent-layer-modal universe-description-modal-phone" style="margin-top: 5vw;">
+        <div class="row col-md-12 text-right">
+          <button data-dismiss="modal" class="close x-close" style="">
+            x
+          </button>
+        </div>
+
+
+        <h4 style="margin-top: 30px;">The Multiverse says to you,</h4>
+        <p style="-webkit-text-fill-color: red;">Dear Sage, this Universe looks like it may be of value for you, and may even have sentient life! Are you sure you wish to destroy it?</p>
+
+        <button class="phone-button-destroy" type="button" (click)="delete(i)">Do not question me Multiverse...destroy this Universe!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Card Modal -->
+
+<div *ngIf="editModalToggle" id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 99999; text-align: center;">
+  <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+    <div class="modal-content" style="background: none;">
+      <div class="transparent-layer-modal universe-description-modal-phone" style="">
+        <div class="row col-md-12 text-right">
+          <button data-dismiss="modal" class="close x-close" style="">
+            x
+          </button>
+        </div>
+
+
+        <h5 style="margin-top: 30px;">Edit Your Universe</h5>
+        <h6 style="margin-top: 30px; margin-bottom: 35px;">Enter your Universe's Name:</h6>
+
+        <input [(ngModel)]="universeName" (keyup)="0" placeholder="{{universeName}}">
+
+        <h6 style="margin-top: 90px; margin-bottom: 35px;">Enter your Universe's Description:</h6>
+        <textarea style="max-width: 90%;" [(ngModel)]="universeDescription" rows="8" cols="150">
+            {{universeDescription}}
+            </textarea>
+        <br /><br />
+        <button class="phone-button" type="button" (click)="editSubmit()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Move Description Modal -->
+
+<div id="moveModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 999999; text-align: center; top: 20vw;">
+  <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+    <div class="modal-content" style="background: none;">
+      <div class="transparent-layer-modal" style="margin-top: auto;">
+        <div class="row col-md-12 text-right">
+          <button data-dismiss="modal" class="close x-close" style="">
+            x
+          </button>
+        </div>
+        <h4 style="margin-top: 30px;" *ngIf="!noUniverseToggle">{{moveName}}</h4>
+        <p style="margin-top: 1vw; font-style: italic;" *ngIf="!noUniverseToggle">{{moveDescription}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Universe Description Modal -->
+
+<div *ngIf="loadModalToggle" id="universeModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 999999; text-align: center;">
+  <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+    <div class="modal-content" style="background: none;">
+      <div class="transparent-layer-modal universe-description-modal-phone" style="margin-top: 0vw;">
+        <div class="row col-md-12 text-right">
+          <button data-dismiss="modal" class="close x-close" style="">
+            x
+          </button>
+        </div>
+        <h5 style="margin-top: 2vw;">Original Universe</h5>
+        <h3 style="margin-top: 1vw;" *ngIf="!noUniverseToggle">{{universeCategory[i].name}}</h3>
+        <h4 style="margin-top: 5vw;">Description</h4>
+        <p style="margin-top: 1vw; font-style: italic;" *ngIf="!noUniverseToggle">"{{universeCategory[i].description}}"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Universe Card Modal -->
+
+<div *ngIf="loadModalToggle" id="cardModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="">
+  <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog" style="max-width: 90vw; margin:auto; text-align: center;">
+    <div class="modal-content" style="background: none;">
+      <div class="row col-md-12 text-right">
+        <button data-dismiss="modal" class="close x-close x-close-card" style="top: .8vw;">
+          x
+        </button>
+      </div>
+      <div *ngIf="!noUniverseToggle" class="transparent-layer-modal-card" [style.background-image]="'url(../../assets/images/universe-cards/' + universeCategory[i].image_path + ')'">
+
+        <div class="move-modal-bubble">
+          <h3 class="title-bubble-one-modal" *ngIf="!noUniverseToggle">{{cards[i].name}}</h3>
+          <svg class="bubble-one-modal">
+            <circle class="circle-one-modal" (click)="universeModal()" cx="7.9vw" cy="7.9vw" r="7.9vw" />
+          </svg>
+        </div>
+
+        <br /><br />
+
+        <div>
+          <div class="transparent-layer-card-object phenomena-layer-object" style="background-color: rgba(0,0,0,0.5); border: 1vw solid rgba(0, 0, 0, .5); margin-top: -2.5vw;">
+            <div class="row" style="margin-bottom: 1vw;">
+              <div class="col-md-12">
+                <h4 class="collectionH4">Phenomena</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 move-phone">
+                <h6 class="collectionH6" (click)="moveToggle1(i)" style="cursor: pointer;">{{cards[i].FK_Move_1}}</h6>
+                <h6 class="collectionH6" (click)="moveToggle2(i)" style="cursor: pointer;">{{cards[i].FK_Move_2}}</h6>
+
+              </div>
+              <div class="col-md-6 move-phone">
+                <h6 class="collectionH6" (click)="moveToggle3(i)" style="cursor: pointer;">{{cards[i].FK_Move_3}}</h6>
+                <h6 class="collectionH6" (click)="moveToggle4(i)" style="cursor: pointer;">{{cards[i].FK_Move_4}}</h6>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1vw;">
+              <div class="col-md-12">
+                <h5 class="collectionH5" (click)="moveToggleUltimate(i)" style="cursor: pointer;">{{cards[i].FK_Move_Ultimate }}</h5>
+              </div>
+            </div>
+            <div class="row card-buttons-edit-destroy" style="margin-top: .2vw;">
+              <div class="col-md-4">
+                <button class="phone-button" type="button" style="transform: translateY(0vw);" (click)="edit(i)">Edit</button>
+              </div>
+              <div class="col-md-4">
+                <h2 class="collectionH2" style="font-size: .9vw; -webkit-text-stroke-width: 0;">Estimated Energy Value: {{cards[i].Energy_Value}}</h2>
+                <h2 class="collectionH2" style="font-size: .7vw; -webkit-text-stroke-width: 0px; margin-top: -.1vw;">(Destroy for 20% Refund Value)</h2>
+              </div>
+              <div class="col-md-4">
+                <button class="phone-button" type="button" style="transform: translateY(0vw);" (click)="sure(i)">Destroy</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-6 transparent-layer-card-object transparent-layer-card-object-phone" style="top: 5vw; left: 10vw; width: 20vw; background-color: rgba(0,0,0,0.5); border: 1vw solid rgba(0, 0, 0, .5);">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="collectionH4">The Forces</h4>
+              </div>
+            </div>
+            <h2 class="collectionH2">
+              {{cards[i].Force_Name_1}}
+              {{cards[i].Strength_Force_1}}
+            </h2>
+            <h2 class="collectionH2">
+              {{cards[i].Force_Name_2}}
+              {{cards[i].Strength_Force_2}}
+            </h2>
+            <h2 class="collectionH2">
+              {{cards[i].Force_Name_3}}
+              {{cards[i].Strength_Force_3}}
+            </h2>
+          </div>
+          <div class="col-md-6 transparent-layer-card-object transparent-layer-card-object-phone" style="top: 5vw;left: 62vw; width: 20vw; background-color: rgba(0,0,0,0.5); border: 1vw solid rgba(0, 0, 0, .5);">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="collectionH4">The Conceptual</h4>
+              </div>
+            </div>
+            <h2 class="collectionH2">
+              {{cards[i].Concept_Name_1}}
+              {{cards[i].Strength_Concept_1}}
+            </h2>
+            <h2 class="collectionH2">
+              {{cards[i].Concept_Name_2}}
+              {{cards[i].Strength_Concept_2}}
+            </h2>
+            <h2 class="collectionH2">
+              {{cards[i].Concept_Name_3}}
+              {{cards[i].Strength_Concept_3}}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+    </div>
+
+
+
+

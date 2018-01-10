@@ -1,0 +1,197 @@
+﻿<div class="stage-2-form">
+  <div style="text-align: center;" class="container transparent-layer" *ngIf="stage2Form.showForm">
+    <br /><br />
+    <h5 style="text-decoration: underline;">Stage 2: The Fine-Tuning Period</h5><br />
+    <!-- Stage 2 Instructions Modal -->
+    <div style="text-align: center; margin-top: 20px;">
+      <div id="openingModal2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+          <div class="modal-content" style="background: none;">
+            <div class="transparent-layer-modal">
+              <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+              </div>
+              <h4 style="color: lime; font-size: 2em;">The Multiverse says to you,</h4> <br /><br />
+              <p>
+                "Congratulations Sage! I don't know how you did it, but you have started making your first Universe!
+                Now it is up to you to fine-tune it's parameters to your liking.  There is no right or wrong answer since you are the God and Creator of this new Universe!"
+              </p>
+              <br />
+              <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+                - Directions: First Remove The Points to the Pool by deducting from your current Universe's attributes. Once they are in the point pool,
+                you can then reassign them as you see wish.  You may not modify any further after you spend the points in your point pool. However, 
+                if you want to start over and try again, just hit the "reset" button at no penalty. You may also spend some energy
+                and take a huge hit to your chance of rolling a <i>Faulty Universe</i> to re-roll the random parts of this Universe's stats. 
+                You may fine-tune the attributes relative to your Sage Level; however
+                the more you fine-tune, the higher the energy cost will be along with an increased likelihood of this Universe 
+                blowing up in your face! (Resulting in a <i>Faulty Universe</i>)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="text-decoration: underline;">{{stage2Form.rolledUniverse.name}}</h3>
+      <h5 style="-webkit-text-fill-color: white;" class="noselect" tooltip={{blah}} placement="top" style="cursor:default; text-align: center; margin-top: 55px;">&nbsp;&nbsp;&nbsp;Points Left You Can Adjust (Based On Sage Level): {{pointsLeftYouCanAdjust}}</h5><br />
+      <h5 style="-webkit-text-fill-color: white;" class="noselect" tooltip={{blah}} placement="top" style="cursor:default; text-align: center;">&nbsp;Points In Pool: {{pointsInPool}}</h5>
+
+      <div class="col-md-12" style="margin-top: 50px;">
+        <h4>The Forces</h4>
+        <div class="row" style="margin-top: 30px;">
+          <div class="col-md-4">
+            <h2>
+
+              <i id="Force_Str_1-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_1-Up')"></i>
+
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2>
+              <i id="Force_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_2-Up')"></i>
+
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2>
+              <i id="Force_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_3-Up')"></i>
+
+            </h2>
+          </div>
+        </div>
+        <div class="row" style="">
+          <div class="col-md-4">
+            <h2 class="noselect" tooltip={{blah}} placement="left" style="display:inline-block; cursor:default;">
+              <!--I am playing with custom tooltip placement/styles-->
+              {{stage2Form.rolledUniverse.Force_1}}: {{stage2Form.rolledUniverse.Force_Str_1}}&nbsp;&nbsp;
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: initial; cursor:default;">
+              {{stage2Form.rolledUniverse.Force_2}}: {{stage2Form.rolledUniverse.Force_Str_2}}&nbsp;&nbsp;
+            </h2>
+          </div>
+          <div class="col-md-4">
+
+            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+              {{stage2Form.rolledUniverse.Force_3}}: {{stage2Form.rolledUniverse.Force_Str_3}}&nbsp;&nbsp;
+            </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h2>
+              <i id="Force_Str_1-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_1-Down')"></i>
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2>
+              <i id="Force_Str_2-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_2-Down')"></i>
+
+            </h2>
+          </div>
+          <div class="col-md-4">
+            <h2>
+              <i id="Force_Str_3-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_3-Down')"></i>
+            </h2>
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 50px;">
+          <div class="row" style="margin-top: 30px;">
+            <button class="center-block" style="margin-right: -100px; text-align: center;" type="button" (click)="reset()" [disabled]="resetToggle">Reset</button><br />
+            <button class="center-block" style="text-align: center;" type="button" (click)="reroll()" [disabled]="resetToggle">Re-Roll</button><br />
+          </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 40px;">
+          <h4>The Conceptual</h4>
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_1-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_1-Up')"></i>
+
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_2-Up')"></i>
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_3-Up')"></i>
+              </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+                {{stage2Form.rolledUniverse.Concept_1}}: {{stage2Form.rolledUniverse.Concept_Str_1}}&nbsp;&nbsp;
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+                {{stage2Form.rolledUniverse.Concept_2}}: {{stage2Form.rolledUniverse.Concept_Str_2}}&nbsp;&nbsp;
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+                {{stage2Form.rolledUniverse.Concept_3}}: {{stage2Form.rolledUniverse.Concept_Str_3}}&nbsp;&nbsp;
+              </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_1-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_1-Down')"></i>
+
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_2-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_2-Down')"></i>
+              </h2>
+            </div>
+            <div class="col-md-4">
+              <h2>
+                <i id="Concept_Str_3-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_3-Down')"></i>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 40px;">
+          <button type="button" (click)="submit()" [disabled]="submitToggle">Confirm</button><br />
+          <div style="text-align: center; margin-top:40px;">
+            <h5>Energy Cost: {{stage2Form.cost}} </h5><br />
+            <h5>Faulty Universe %: {{stage2Form.faultyUniverse}} </h5><br /><br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 2 Error Modal -->
+    <div style="text-align: center;">
+      <div id="errorModal2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+          <div class="modal-content" style="background: none;">
+            <div class="transparent-layer-modal-error">
+              <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+              </div>
+              <h4 style="font-size: 1em;">The Multiverse says to you,</h4> <br /><br />
+              <p style="font-style:italic; margin-top:-20px;">
+                {{errorModalMessage}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-stage-3-form [stage3Form]="stage3Form" *ngIf="stage3Form"></app-stage-3-form><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->

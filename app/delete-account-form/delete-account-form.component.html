@@ -1,0 +1,71 @@
+﻿<div class="delete-account transparent-layer">
+  <div style="text-align: center; margin-top: 30px;">
+    <h4 style="margin-bottom: 30px;">{{title}}</h4>
+    <p style="margin-bottom: 30px;">"{{subTitle2}}"<p>
+    <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+        - Directions: Fill out the following account information in order
+        to delete your SOMV account.
+    </p>
+
+  </div>
+
+<div style="text-align: center;">
+  <div class="row">
+    <div class="col-md-6">
+      <h3 style="margin-bottom: 30px;">Re-Enter your <i>Real</i> Name</h3>
+      <input [(ngModel)]="realname" (keyup)="0" placeholder="Real Name">
+      <h5 style="margin-top: 20px;">-- {{realname}} --</h5>
+    </div>
+    <div class="col-md-6">
+      <h3 style="margin-bottom: 30px;">Re-Enter your Password</h3>
+      <input [(ngModel)]="password" (keyup)="0" placeholder="Password">
+      <h5 style="margin-top: 20px;">-- {{password}} --</h5><br />
+    </div>
+  </div>
+
+  <h4 style="margin-bottom: 30px; -webkit-text-fill-color: red; color: red;">{{subTitle}}</h4>
+  <button type="button" (click)="cueAreYouSure()">Delete My Sage Account</button>
+
+  <h4 style="color: red; -webkit-text-fill-color: red; color: red; margin-bottom: 10px; margin-top: 30px;">{{error}}</h4>
+  <p style="color: red; margin-bottom: 10px;">{{error2}}</p>
+
+  <!-- Are You Sure Modal -->
+  <div style="text-align: center;">
+    <div id="areYouSureModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <h4 style="margin-bottom: 40px;">The Multiverse says to you,</h4> 
+            <p style="font-style:italic; margin-top:-20px; margin-bottom: 40px; -webkit-text-fill-color: red; color: red; padding: 20px;">
+              "Dear Sage, I plead with you one last time to not do this! Your existence will be missed greatly in this realm of higher reality..."
+            </p>
+            <button type="button" (click)="confirmDelete()">I'm Sure Multiverse....Please Delete My Sage Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+
+  <!-- Response Modal -->
+  <div style="text-align: center; margin-top: -3em;">
+    <div id="responseModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <p style="font-style:italic; margin-top:-20px;">
+              {{response}}
+            </p>
+            <br />
+            <h4 style="margin-top:-20px; margin-bottom: 40px; -webkit-text-fill-color: red; color: red; padding: 20px;">
+              Account Deleted
+            </h4>
+            <input type="hidden" id="responseSubmit" (click)="redirect()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+</div>

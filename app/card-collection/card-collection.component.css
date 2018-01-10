@@ -1,0 +1,486 @@
+﻿
+.anil {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all 1s linear; /*opening speed*/
+  -o-transition: all 1s linear; /*opening speed*/
+  transition: all 1s linear; /*opening speed*/
+}
+
+  .anil.in {
+    opacity: 1;
+    transform: scale(1); /*size of the div to scal after .in class attached on opening modal*/
+  }
+
+.modal {
+  top: 5% !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+#CORS:hover {
+  color: yellow;
+}
+
+.cost {
+  color: honeydew;
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-text-fill-color: honeydew; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: black;
+}
+
+label {
+  color: lime;
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-text-fill-color: lime; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+.inputBox {
+  color: black;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+a:hover {
+  color: white;
+}
+
+.inputBox2 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+}
+
+.transparent-layer {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: 10px solid rgba(0, 0, 0, 1);
+  padding-left: 20px;
+  min-height: 33em;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.transparent-layer-modal {
+  margin-top: -9vw;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(12%, 35%);
+  padding: 20px;
+  width: 80%;
+}
+
+
+.transparent-layer-modal-error {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: red;
+  -webkit-text-fill-color: red; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(12%, 170%);
+  padding: 20px;
+  width: 80%;
+}
+
+.transparent-layer-modal-results {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: red;
+  font-weight: bold;
+  -webkit-text-fill-color: lawngreen; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 20%;
+  margin-left: 10%;
+  padding: 20px;
+  width: 80%;
+}
+
+h1 {
+  font-size: 1.5vw;
+  margin-top: 20px;
+  color: aqua;
+  -webkit-text-fill-color: aqua;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+h2 {
+  color: deepskyblue;
+  -webkit-text-fill-color: deepskyblue;
+  font-size: 1.3vw;
+  font-weight: 700;
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+  margin-top: 20px;
+}
+
+/*h3 I am dubbing the universe name header*/
+h3 {
+  color: burlywood;
+  font-size: 1.7vw;
+  font-weight: 800;
+  -webkit-text-fill-color: burlywood; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+}
+
+form {
+  margin-top: 30px;
+}
+
+h4 {
+  color: yellow;
+  font-size: 1.5vw;
+  -webkit-text-fill-color: yellow; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .4px;
+  -webkit-text-stroke-color: black;
+}
+
+h6 {
+  color: greenyellow;
+  -webkit-text-fill-color: greenyellow;
+  font-size: 1.3vw;
+  font-weight: 700;
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+  margin-top: 20px;
+}
+
+h5 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+  font-weight: 700;
+  font-size: 1.4vw;
+  margin-top: 1vw;
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+}
+
+h2 {
+  -webkit-text-fill-color: lime; /* Will override color (regardless of order) */
+  font-weight: 700;
+  font-size: 1.3vw;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.universe-generator {
+  padding: 5%;
+  padding-top: 0%;
+  margin-top: -4%;
+}
+
+.fa-spinner {
+  color: white;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+small {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+p {
+  color: white;
+  font-size: 1.1em;
+  font-family:;
+  /* font-weight: 700; */
+  /* -webkit-text-fill-color: white; */
+  /* -webkit-text-stroke-width: .8px; */
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.bubble-one {
+  background-image: url("../../assets/images/bubble-universes/bubble1.png");
+  background-size: contain;
+  width: 20vw;
+  height: 20vw;
+  margin: 0;
+  background-repeat: no-repeat;
+}
+
+.bubble-two {
+  background-image: url("../../assets/images/bubble-universes/bubble2.png");
+  background-size: contain;
+  width: 21vw;
+  height: 21vw;
+  background-repeat: no-repeat;
+}
+
+.title-bubble-one {
+  position: relative;
+  top: -1vw;
+  left: 2.2vw;
+  transform: translate(2vw,12vw);
+  line-height: 2.7vw;
+  text-align: center;
+  width: 60%;
+  word-wrap: inherit;
+}
+
+/*
+  Optional stying 2 for text outside the bubble...
+      position: relative;
+    top: 0;
+    left: 0;
+    -webkit-transform: translate(2vw,12vw);
+    transform: translate(2vw,12vw);
+    line-height: 2.7vw;
+    text-align: center;
+    width: 40em;
+    word-wrap: inherit;
+
+
+*/
+
+.title-bubble-two {
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: translate(6.1vw,9vw);
+}
+
+circle{
+  fill-opacity: 0;
+  fill:aquamarine;
+}
+
+circle:hover {
+  cursor: pointer;
+  fill-opacity: .2;
+
+}
+
+.universe-spread {
+  display: inline-block; 
+  margin: 1.5vw;
+}
+
+[override] .spinner {
+  position: fixed;
+  padding: 0px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 9998;
+  background: #000;
+  opacity: .9;
+  transition: opacity 0.3s linear;
+}
+
+[override] .center {
+  margin: auto;
+  width: 100%;
+}
+
+[override] .loading-text {
+  text-align: center;
+  position: fixed;
+  bottom: 0vw;
+  transform: translate(32vw, -38vw);
+  opacity: 1;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: .1vw;
+  -webkit-text-stroke-color: black;
+  transition: opacity 0.3s linear;
+  font-size: 2.5vw;
+  width: 37vw;
+  /* margin-right: -50%; */
+}
+
+[override] .spinner img {
+  padding: 0px;
+  background: #000;
+  object-fit: cover;
+  transition: opacity 0.3s linear;
+  position: fixed;
+  bottom: 0vw;
+  left: 58vw;
+  transform: translate(-21vw, 0vw);
+  width: 26vw;
+  height: 36vw;
+  opacity: 1;
+  /*margin-right: 50%;*/
+}
+
+.transparent-layer-modal-card {
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  border: solid .7vw #000;
+  background-color: rgba(0,0,0,0.8);
+  border-color: black;
+  color: white;
+  position: fixed;
+  top: 0vw;
+  left: 0;
+  bottom:0;
+  right:0;
+  padding: 20px;
+  width: 90vw;
+  height: 45vw;
+  max-width:95vw;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.transparent-layer-card-object {
+  border-radius: 1vw;
+  border: solid 1vw #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  position: fixed;
+  top: 25vw;
+  left: 10vw;
+  padding: 1vw;
+  width: 80%;
+  font-size: 1.2vw;
+}
+
+.title-bubble-one-modal {
+  top: -3vw;
+  left: 19.6vw;
+  /* -webkit-transform: translate(2vw,12vw); */
+  transform: translate(36.6vw,9vw);
+  /* line-height: 2.7vw; */
+  font-size: 1.5vw;
+  line-height: 1.9vw;
+  text-align: center;
+  width: 15%;
+  word-wrap: break-word;
+}
+
+.bubble-one-modal {
+  background-image: url("../../assets/images/bubble-universes/bubble1.png");
+  background-size: contain;
+  width: 16vw;
+  height: 16vw;
+  margin: 0;
+  background-repeat: no-repeat;
+}
+
+.circle-one-modal {
+  fill-opacity: .1;
+  fill: blue;
+}
+
+.circle-one-modal:hover {
+  cursor: pointer;
+  fill-opacity: .2;
+}
+
+.move-modal-bubble{
+  transform:translate(1vw,-1vw);
+}
+
+.horzontal-nav-buttons {
+  margin-left: 32vw;
+  margin-top: 4.4vw;
+  position: fixed;
+  display: normal;
+}
+
+/*horizontal sliding CSS
+
+.horizontal-scroll-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg);
+  transform-origin: right top;
+  transform: rotate(-90deg) translateY(-100px);
+}
+
+
+
+  .horizontal-scroll-wrapper > div {
+    transform: rotate(90deg);
+    transform-origin: right top;
+  }
+
+#parent {
+  width: 6000px;
+}
+
+.contentBlock {
+  font-size: 10em;
+  text-align: center;
+  line-height: 400px;
+  height: 400px;
+  width: 500px;
+  margin: 10px;
+  border: 1px solid black;
+  float: left;
+}
+
+.panner {
+  border: 1px solid black;
+  display: block;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top: 45%;
+}
+
+.active {
+  color: red;
+}
+
+#panLeft {
+  left: 0px;
+}
+
+#panRight {
+  right: 0px;
+}
+  */

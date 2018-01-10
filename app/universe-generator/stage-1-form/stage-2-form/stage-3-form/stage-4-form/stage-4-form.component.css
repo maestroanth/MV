@@ -1,0 +1,237 @@
+﻿.anil {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all 1s linear; /*opening speed*/
+  -o-transition: all 1s linear; /*opening speed*/
+  transition: all 1s linear; /*opening speed*/
+}
+
+  .anil.in {
+    opacity: 1;
+    transform: scale(1); /*size of the div to scal after .in class attached on opening modal*/
+  }
+
+.modal {
+  top: 5% !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+#CORS:hover {
+  color: yellow;
+}
+
+.cost {
+  color: honeydew;
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-text-fill-color: honeydew; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: black;
+}
+
+label {
+  color: lime;
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-text-fill-color: lime; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+.inputBox {
+  color: black;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+a:hover {
+  color: white;
+}
+
+.inputBox2 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+}
+
+.transparent-layer {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border: 10px solid rgba(0, 0, 0, 1);
+  padding-left: 20px;
+  min-height: 33em;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.transparent-layer-modal {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(12%, 20%);
+  padding: 20px;
+  width: 80%;
+}
+
+.transparent-layer-modal-error {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: red;
+  -webkit-text-fill-color: red; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(12%, 170%);
+  padding: 20px;
+  width: 80%;
+}
+
+.transparent-layer-modal-results {
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: solid 10px #000;
+  background-color: rgba(0,0,0,0.8);
+  color: red;
+  font-weight: bold;
+  -webkit-text-fill-color: lawngreen; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 20%;
+  margin-left: 10%;
+  padding: 20px;
+  width: 80%;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  color: aqua;
+  -webkit-text-fill-color: aqua;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+h2 {
+  color: deepskyblue;
+  -webkit-text-fill-color: deepskyblue;
+  font-size: 1.3em;
+  font-weight: 700;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin-top: 20px;
+}
+
+/*h3 I am dubbing the universe name header*/
+h3 {
+  color: burlywood;
+  font-size: 1.5em;
+  font-weight: 800;
+  -webkit-text-fill-color: burlywood; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+form {
+  margin-top: 30px;
+}
+
+h4 {
+  color: yellow;
+  margin-top: -5px;
+  font-size: 1.5em;
+  -webkit-text-fill-color: yellow; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: .4px;
+  -webkit-text-stroke-color: black;
+  margin-top: 30px;
+}
+
+h6 {
+  color: greenyellow;
+  -webkit-text-fill-color: greenyellow;
+  font-size: 1.3em;
+  font-weight: 700;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin-top: 20px;
+}
+
+h5 {
+  -webkit-text-fill-color: gold; /* Will override color (regardless of order) */
+  font-weight: 700;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+h2 {
+  -webkit-text-fill-color: lime; /* Will override color (regardless of order) */
+  font-weight: 700;
+  font-size: 1.3em;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.universe-generator {
+  padding: 5%;
+  padding-top: 0%;
+  margin-top: -4%;
+}
+
+.fa-spinner {
+  color: white;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+}
+
+small {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 700;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+p {
+  color: white;
+  font-size: 1.1em;
+  font-family:;
+  /* font-weight: 700; */
+  /* -webkit-text-fill-color: white; */
+  /* -webkit-text-stroke-width: .8px; */
+  -webkit-text-stroke-color: black;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}

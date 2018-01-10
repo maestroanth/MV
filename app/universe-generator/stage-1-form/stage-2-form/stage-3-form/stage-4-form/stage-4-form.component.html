@@ -1,0 +1,50 @@
+﻿<div class="stage-4-form">
+  <div style="text-align: center;" class="container transparent-layer" *ngIf="stage4Form.showForm">
+    <br /><br />
+    <!--Opening Model Stage 4-->
+    <div style="text-align: center; margin-top: -5em;">
+      <div id="openingModal4" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+          <div class="modal-content" style="background: none;">
+            <div class="transparent-layer-modal">
+              <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+              </div>
+              <h4>The Multiverse says to you,</h4> <br /><br />
+              <p>
+                "Congratulations Sage!  If you are seeing this page, that means you successfully created your Universe Card without any glitches!"<br />
+              </p>
+              <br />
+              <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+                - Directions: Here you can truly make this universe to you by choosing a name and write a custom description for it".
+                <br /><br />
+                You can relax now, for this is no risk or cost for simply editting the name and description of your unique universe to your liking.....
+              </p><br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+    </div>
+
+    <h5>Stage 4: Customization</h5><br />
+
+    <h6 style="margin-top: 50px; margin-bottom: 35px;">Enter your Universe's Name:</h6>
+    <input [(ngModel)]="universeName" (keyup)="0" placeholder="{{universeName}}">
+
+    <h2 style="margin-top: 90px; margin-bottom: 35px;">Your New Universe will be further known throughout the Multiverse as:</h2>
+    <h3 style="margin-top: 35px; margin-bottom: 35px;">{{universeName}}</h3>
+
+    <h6 style="margin-top: 90px; margin-bottom: 35px;">Enter your Universe's Description:</h6>
+    <textarea style="max-width: 90%;" [(ngModel)]="universeDescription" rows="12" cols="150">
+      {{universeDescription}}
+    </textarea>
+
+    <h4 style="color: blueviolet; margin-top: 40px;">Description:</h4>
+    <p>{{universeDescription}}</p><br /><br />
+    <button type="button" (click)="submit()" [disabled]="submitToggle">Confirm....Show me my Universe!</button><br /><br />
+  </div>
+</div>
+<app-render-universe [renderUniverseForm]="renderUniverseForm"></app-render-universe><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->

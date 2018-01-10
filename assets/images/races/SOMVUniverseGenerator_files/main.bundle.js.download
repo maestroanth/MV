@@ -1,0 +1,2285 @@
+webpackJsonp([1,4],{
+
+/***/ 105:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APIClientAuthService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+ //this is to get baseAPIURLtokenURL
+
+
+
+
+
+var APIClientAuthService = (function () {
+    function APIClientAuthService(http) {
+        this.http = http;
+        //private apiClientToken = new APIToken;
+        this.headers = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Accept': 'application/json',
+        });
+        this.apiCCClient = {
+            grant_type: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].grantType,
+            client_id: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].appID,
+            client_secret: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].appSecret,
+            scope: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].scope,
+        };
+        this.apiPasswordClient = {
+            grant_type: "password",
+            client_id: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].appID,
+            client_secret: __WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].appSecret,
+            username: null,
+            password: null,
+            scope: "*"
+        };
+    }
+    /**********************************************************************************************************
+     * Generates authorization token from environment variables
+     ************************************************************************************************************/
+    APIClientAuthService.prototype.getClientToken = function () {
+        var _this = this;
+        this.token = this.http.post(__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].tokenURL, JSON.stringify(this.apiCCClient), { headers: this.headers })
+            .map(function (res) { return _this.postResponse = res.json(); }).retryWhen(function (errors) { return errors.delay(1000).take(5); }); //10 retries when there are errors evades the whole preflight crap!!!! ;DDDD
+        return this.token;
+    }; //**getClientToken()**//
+    APIClientAuthService.prototype.getPasswordToken = function (sageName, password) {
+        var _this = this;
+        this.apiPasswordClient.username = sageName;
+        this.apiPasswordClient.password = password;
+        console.log('to send to api: ' + JSON.stringify(this.apiPasswordClient));
+        this.token = this.http.post(__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].tokenURL, JSON.stringify(this.apiPasswordClient), { headers: this.headers })
+            .map(function (res) { return _this.postResponse = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].range(1, 4))
+            .flatMap(function (_a) {
+            var error = _a[0], i = _a[1];
+            if (i > 3) {
+                return __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].throw(error.json().error || 'Server error');
+            }
+            console.log('delay retry by ' + i + ' second(s)');
+            return __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].timer(i * 100);
+        }); }); //10 retries when there are errors evades the whole preflight crap!!!! ;DDDD
+        return this.token;
+    }; //**getClientToken()**//
+    return APIClientAuthService;
+}());
+APIClientAuthService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["c" /* Injectable */])() //this lets parameters be injected!
+    ,
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["c" /* Http */]) === "function" && _a || Object])
+], APIClientAuthService);
+
+var _a;
+//# sourceMappingURL=api-client-auth-service.js.map
+
+/***/ }),
+
+/***/ 106:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Race; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var Race = (function () {
+    function Race() {
+    }
+    return Race;
+}());
+Race = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])()
+], Race);
+
+//# sourceMappingURL=race.js.map
+
+/***/ }),
+
+/***/ 168:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APIGetFetcherService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+//import { APIFetcherFormComponent} from './apifetcher-form/apifetcher-form.component';
+
+
+
+var APIGetFetcherService = (function () {
+    function APIGetFetcherService(http) {
+        this.http = http;
+        this.NASA_KEY = 'fwMu6AQOR7jmwOtQkPwqMUKyXFssJLRbk90caHor';
+        this.GMAIL_KEY = 'AIzaSyABHAdaAQrKCdZBg5y0i9UEp1RQfyk7Ef4';
+        this.GMAIL_OAUTH_KEY = '769416451298-nika55bcqu3ecgdh11t5fulmslodlcsp.apps.googleusercontent.com';
+        this.GMAIL_CLIENT_SECRET_KEY = 'U0Ds5vksMQm-7IlwDSFgDZMF';
+        //private dataUrl = 'https://jsonplaceholder.typicode.com/posts';
+        //private dataURL = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=' + this.NASA_KEY;  //default URL
+        //bad url requests can generate the "falsely Universe" card instead of an error message
+        this.dataURL = 'https://www.googleapis.com/gmail/v1/users/maestroanth%40gmail.com/profile?Access_token=' + this.GMAIL_OAUTH_KEY;
+    }
+    APIGetFetcherService.prototype.getData = function (URL) {
+        if (URL) {
+            this.dataURL = URL;
+        }
+        return this.http.get(this.dataURL).map(function (res) { return res.json(); }).catch(this.handleError);
+    };
+    APIGetFetcherService.prototype.getDataASync = function (URL, requestType) {
+        if (URL) {
+            this.dataURL = URL;
+        }
+        if (requestType == 'JSON') {
+            return this.http.get(this.dataURL)
+                .toPromise()
+                .then(function (response) { return response.json(); })
+                .catch(this.handleError);
+        }
+        else {
+            return this.http.get(this.dataURL)
+                .toPromise()
+                .then(function (response) { return response; })
+                .catch(this.handleError);
+        }
+    }; // stub
+    APIGetFetcherService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    return APIGetFetcherService;
+}());
+APIGetFetcherService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
+], APIGetFetcherService);
+
+var _a;
+//# sourceMappingURL=apiget-fetcher.service.js.map
+
+/***/ }),
+
+/***/ 169:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SageAccount; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var SageAccount = (function () {
+    function SageAccount() {
+    }
+    return SageAccount;
+}());
+SageAccount = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])()
+], SageAccount);
+
+//# sourceMappingURL=sage-account.js.map
+
+/***/ }),
+
+/***/ 170:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Subject__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_Subject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__environments_environment__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__race__ = __webpack_require__(106);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SageCreationService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var SageCreationService = (function () {
+    function SageCreationService(http, router) {
+        this.http = http;
+        this.router = router;
+        this.error = new __WEBPACK_IMPORTED_MODULE_6_rxjs_Subject__["Subject"]();
+        this.race = new __WEBPACK_IMPORTED_MODULE_8__race__["a" /* Race */];
+        this.headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Accept': 'application/json',
+        });
+    }
+    SageCreationService.prototype.sendError = function (error) {
+        console.log("In Sage Creation Service: " + JSON.stringify(error));
+        //console.log('sendSage() ' + JSON.stringify(sage));
+        this.error.next(error);
+    };
+    SageCreationService.prototype.clearError = function () {
+        this.error.next();
+    };
+    SageCreationService.prototype.getError = function () {
+        //console.log('getSage() ' + JSON.stringify(this.sageSubject.asObservable));
+        return this.error.asObservable();
+    };
+    SageCreationService.prototype.setRaceInfo = function (raceID) {
+        var _this = this;
+        //1. Get Race Data
+        //console.log("Current Auth Token: " + localStorage.getItem('access_token'));
+        this.token = localStorage.getItem('access_token');
+        this.headers.set('Authorization', 'Bearer ' + this.token.replace('"', ''));
+        this.url = __WEBPACK_IMPORTED_MODULE_7__environments_environment__["a" /* environment */].baseAPIUrl + 'api/race/' + raceID;
+        this.response = this.http.get(this.url, { headers: this.headers })
+            .map(function (res) { return _this.response = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].range(1, 4))
+            .flatMap(function (_a) {
+            var error = _a[0], i = _a[1];
+            if (i > 3) {
+                return __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].throw(error.json().error || 'Server error');
+            }
+            console.log('delay retry by ' + i + ' second(s)');
+            return __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].timer(i * 100);
+        }); });
+        this.response.subscribe(function (data) {
+            //console.log('observing Race: ' + JSON.stringify(this.response));
+        }, function (err) { return _this.sendError(err); });
+        //console.log("Local Race Variable: " + JSON.stringify(this.response));
+        return this.response;
+    };
+    SageCreationService.prototype.setTooltipInfo = function () {
+        var _this = this;
+        //1. Get Tooltip Data
+        //console.log("Current Auth Token: " + localStorage.getItem('access_token'));
+        this.token = localStorage.getItem('access_token');
+        this.headers.set('Authorization', 'Bearer ' + this.token.replace('"', ''));
+        this.tipCategoryID = 1;
+        this.url = __WEBPACK_IMPORTED_MODULE_7__environments_environment__["a" /* environment */].baseAPIUrl + 'tooltips/' + this.tipCategoryID;
+        this.response = this.http.get(this.url, { headers: this.headers })
+            .map(function (res) { return _this.response = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].range(1, 4))
+            .flatMap(function (_a) {
+            var error = _a[0], i = _a[1];
+            if (i > 3) {
+                return __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].throw(error.json().error || 'Server error');
+            }
+            console.log('delay retry by ' + i + ' second(s)');
+            return __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].timer(i * 100);
+        }); });
+        this.response.subscribe(function (data) {
+            console.log('observing Tooltip: ' + JSON.stringify(_this.response));
+        }, function (err) { return _this.sendError(err); });
+        //console.log("Local Race Variable: " + JSON.stringify(this.response));
+        return this.response;
+    };
+    return SageCreationService;
+}());
+SageCreationService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object])
+], SageCreationService);
+
+var _a, _b;
+//# sourceMappingURL=sage-creation.service.js.map
+
+/***/ }),
+
+/***/ 301:
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 301;
+
+
+/***/ }),
+
+/***/ 302:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(58);
+
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* enableProdMode */])();
+}
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 312:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountChangeFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+//import { SageAcc } from './hero';
+var AccountChangeFormComponent = (function () {
+    function AccountChangeFormComponent(_fb, apiAccountsService, router) {
+        this._fb = _fb;
+        this.apiAccountsService = apiAccountsService;
+        this.router = router;
+        this.subForm = {
+            caption: null,
+            showForm: false,
+            requestType: '2'
+        };
+    }
+    AccountChangeFormComponent.prototype.ngOnInit = function () {
+        this.myForm = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* FormGroup */]({
+            whateverField: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* FormControl */]()
+        });
+    };
+    AccountChangeFormComponent.prototype.update = function () {
+        var _this = this;
+        this.response = "Revolving the Multiverse around you to customize your needs......";
+        this.sage = this.apiAccountsService.updateAccount(this.subForm.requestType, this.input);
+        var oldInput = localStorage.getItem(this.subForm.requestType);
+        this.sage.subscribe(function (data) {
+            //setNewData in Local Storage
+            //console.log("data: " + JSON.stringify(this.sage));
+            if (_this.subForm.requestType == 'password') {
+                _this.response = "Good News! Multiverse successfully revolved to your needs! (Password sucessfully changed. Please login again.)";
+                setTimeout(function () {
+                    _this.router.navigate(['login']);
+                }, 3000);
+            }
+            else {
+                localStorage.setItem(_this.subForm.requestType, data['data'][_this.subForm.requestType]);
+                _this.response = "Good News! The Multiverse successfully revolved itself to your needs! Here's the update: Old --- " + oldInput + " New --- " + localStorage.getItem(_this.subForm.requestType);
+            }
+        });
+    };
+    return AccountChangeFormComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Input */])(),
+    __metadata("design:type", Object)
+], AccountChangeFormComponent.prototype, "subForm", void 0);
+AccountChangeFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-account-change-form',
+        template: __webpack_require__(457),
+        styles: [__webpack_require__(386)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["g" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__["a" /* APIAccountsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__["a" /* APIAccountsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], AccountChangeFormComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=account-change-form.component.js.map
+
+/***/ }),
+
+/***/ 313:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sage_user_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__account_settings_service__ = __webpack_require__(314);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountSettingsComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+//import { slideInDownAnimation } from '../animations';
+var AccountSettingsComponent = (function () {
+    function AccountSettingsComponent(sageUserService, accountSettingsService, router) {
+        var _this = this;
+        this.sageUserService = sageUserService;
+        this.accountSettingsService = accountSettingsService;
+        this.router = router;
+        this.sage = {
+            id: null,
+            sagename: null,
+            password: null,
+            realname: null,
+            email: null,
+            created_at: null,
+            updated_at: null,
+        };
+        this.subForm = {
+            caption: null,
+            showForm: false,
+            requestType: null,
+        };
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__["Subscription"];
+        this.subscriptionForm = new __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__["Subscription"];
+        this.sageNameWarning = null;
+        this.title = 'Loading...';
+        this.subTitle = '';
+        this.title = 'Dear Sage, ' + localStorage.getItem('sagename') + ':';
+        this.subTitle = 'I\'m sorry that the Multiverse doesn\'t quite suit your needs. How may I adjust them?';
+        this.subscriptionForm = this.accountSettingsService.getSubForm().subscribe(function (incomingSubForm) {
+            _this.subForm = incomingSubForm;
+        });
+    }
+    AccountSettingsComponent.prototype.ngOnInit = function () {
+    };
+    AccountSettingsComponent.prototype.updateSageName = function () {
+        this.subForm.showForm = false;
+        this.sageNameWarning = 'In Order To Change Your Sage Name: Please Contact System Admin at https://www.netdoodler.com (then hit contact from the menu)';
+        //this.accountSettingsService.sendSubForm(this.subForm, this.sage.sagename);
+    };
+    AccountSettingsComponent.prototype.updatePassword = function () {
+        this.subForm.showForm = true;
+        this.subForm.requestType = "password";
+        this.subForm.caption = 'Change Password';
+        this.accountSettingsService.sendSubForm(this.subForm);
+    };
+    AccountSettingsComponent.prototype.updateRealName = function () {
+        this.subForm.showForm = true;
+        this.subForm.requestType = "realname";
+        this.subForm.caption = 'Change Your Real Name (*Disclaimer: This does NOT legally change your real name!)';
+        this.accountSettingsService.sendSubForm(this.subForm);
+    };
+    AccountSettingsComponent.prototype.updateEmail = function () {
+        this.subForm.showForm = true;
+        this.subForm.requestType = "email";
+        this.subForm.caption = 'Change Email';
+        this.accountSettingsService.sendSubForm(this.subForm);
+    };
+    AccountSettingsComponent.prototype.delete = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id') + '/delete']);
+    };
+    AccountSettingsComponent.prototype.back = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id')]); //has to navigate and THEN trigger the broadcast singleton
+    };
+    return AccountSettingsComponent;
+}());
+AccountSettingsComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-account-settings',
+        template: __webpack_require__(458),
+        styles: [__webpack_require__(387)],
+        providers: [__WEBPACK_IMPORTED_MODULE_6__account_settings_service__["a" /* AccountSettingsService */]]
+        //animations: [slideInDownAnimation]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__sage_user_service__["a" /* SageUserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__sage_user_service__["a" /* SageUserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__account_settings_service__["a" /* AccountSettingsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__account_settings_service__["a" /* AccountSettingsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], AccountSettingsComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=account-settings.component.js.map
+
+/***/ }),
+
+/***/ 314:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountSettingsService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AccountSettingsService = (function () {
+    function AccountSettingsService() {
+        this.subForm = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+    }
+    AccountSettingsService.prototype.sendSubForm = function (subForm) {
+        //console.log('sendSage() ' + JSON.stringify(sage));
+        this.subForm.next(subForm);
+    };
+    AccountSettingsService.prototype.clearSubForm = function () {
+        this.subForm.next();
+    };
+    AccountSettingsService.prototype.getSubForm = function () {
+        //console.log('getSage() ' + JSON.stringify(this.sageSubject.asObservable));
+        return this.subForm.asObservable();
+    };
+    return AccountSettingsService;
+}());
+AccountSettingsService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [])
+], AccountSettingsService);
+
+//# sourceMappingURL=account-settings.service.js.map
+
+/***/ }),
+
+/***/ 315:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apiget_fetcher_service__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(23);
+/* unused harmony export Get */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APIFetcherFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var Get = (function () {
+    function Get() {
+    }
+    return Get;
+}());
+
+var APIFetcherFormComponent = (function () {
+    function APIFetcherFormComponent(jsonPipe, apiGetFetcherService, router) {
+        this.jsonPipe = jsonPipe;
+        this.apiGetFetcherService = apiGetFetcherService;
+        this.router = router;
+        this.title = 'Fill out this form to create a universe from a website!';
+        this.tutorial = 'Brief Introduction: Welcome Sage, to your Universe Generator! Here you can build your own unique universes by running any web request through the generator (inspired by the Playstation game: Monster Rancher). '
+            + 'Some sites may create incredibly rare universes that may have the laws of physics so finely-tuned that they even support intelligent life. Maybe even life that can exist without pain or suffering (take that GOD, ;P ) '
+            + 'However, other universes could be just complete duds that get suck right back into their own moments of creation through having too strong of gravity or whatever.... '
+            + 'Every web address creates a different universe from which you can then customize! Are you the type of Sage that would like to create a morally perfect '
+            + ' Universe where life lives infinitely in harmonic bliss? Or are you the type of Sage that believes life with perfect bliss would be far too boring and needs a '
+            + ' "little evil" and "suffering" in order for it to be interesting?  Or maybe you are the type of Sage that says to hell with the laws of physics and desires to build a '
+            + ' Universe where the laws are random and make no or limited sense! Or maybe you would like a Universe where stuff like "magic" or "divine intervention" ARE part of the '
+            + ' laws of physics? '
+            + ' The decisions are yours Sage, ' + localStorage.getItem('sagename') + ' of the Multiverse!!!!';
+        this.get = {
+            url: 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY',
+            type: 'JSON'
+        };
+    }
+    APIFetcherFormComponent.prototype.ngOnInit = function () {
+        //console.log(this.apiGetFetcherService.getData().subscribe(val => console.log(val)));
+    };
+    APIFetcherFormComponent.prototype.showData = function () {
+        this.inputURL = this.get.url;
+        this.inputType = this.get.type;
+        console.log(this.inputURL);
+        //this.returnData = this.apiGetFetcherService.getData().subscribe(val => this.returnData = val);
+        if (this.inputURL) {
+            this.returnData = this.apiGetFetcherService.getDataASync(this.inputURL, this.inputType);
+        }
+        else {
+            //show error
+        }
+        //console.log(this.someData);
+        //let parsingData = JSON.stringify(this.someData);
+        //JSON.parse(this.returnData);
+    };
+    APIFetcherFormComponent.prototype.back = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id')]); //has to navigate and THEN trigger the broadcast singleton
+    };
+    return APIFetcherFormComponent;
+}());
+APIFetcherFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-apifetcher-form',
+        template: __webpack_require__(459),
+        styles: [__webpack_require__(388)],
+        providers: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */], __WEBPACK_IMPORTED_MODULE_2__apiget_fetcher_service__["a" /* APIGetFetcherService */]]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__apiget_fetcher_service__["a" /* APIGetFetcherService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__apiget_fetcher_service__["a" /* APIGetFetcherService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], APIFetcherFormComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=apifetcher-form.component.js.map
+
+/***/ }),
+
+/***/ 316:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = 'Sage of the Multiverse: Universe Generator!';
+    }
+    return AppComponent;
+}());
+AppComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-root',
+        template: __webpack_require__(460),
+        styles: [__webpack_require__(389)]
+    })
+], AppComponent);
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 317:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__ = __webpack_require__(438);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_font_awesome_angular_font_awesome__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tooltip__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__apifetcher_form_apifetcher_form_component__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__apifetcher_form_apiget_fetcher_service__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__api_accounts_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__welcome_form_welcome_form_component__ = __webpack_require__(326);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__api_client_auth_service__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__sage_user_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__page_not_found_page_not_found_component__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__new_account_form_new_account_form_component__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__login_form_login_form_component__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__sage_home_sage_home_component__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__account_settings_account_settings_component__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__account_settings_account_change_form_account_change_form_component__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__delete_account_form_delete_account_form_component__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__sage_creation_sage_creation_component__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__view_sage_profile_view_sage_profile_component__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__sage_creation_race_selector_sub_form_race_selector_sub_form_component__ = __webpack_require__(322);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+//modules
+
+
+
+
+
+
+
+//components
+
+
+//services
+
+
+
+
+
+//routes
+
+
+
+
+
+
+
+
+
+
+
+var appRoutes = [
+    /*Note: Routes have to go 'in order', if you put '**' above all others it'll resolve to '**' first and show not found component.**/
+    { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+    { path: 'welcome', component: __WEBPACK_IMPORTED_MODULE_11__welcome_form_welcome_form_component__["a" /* WelcomeFormComponent */] },
+    { path: 'new-account', component: __WEBPACK_IMPORTED_MODULE_16__new_account_form_new_account_form_component__["a" /* NewAccountFormComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_17__login_form_login_form_component__["a" /* LoginFormComponent */] },
+    { path: 'sagehome/:id', component: __WEBPACK_IMPORTED_MODULE_18__sage_home_sage_home_component__["a" /* SageHomeComponent */] },
+    { path: 'sagehome/:id/settings', component: __WEBPACK_IMPORTED_MODULE_19__account_settings_account_settings_component__["a" /* AccountSettingsComponent */] },
+    { path: 'sagehome/:id/delete', component: __WEBPACK_IMPORTED_MODULE_21__delete_account_form_delete_account_form_component__["a" /* DeleteAccountFormComponent */] },
+    { path: 'sagehome/:id/sage-creation', component: __WEBPACK_IMPORTED_MODULE_22__sage_creation_sage_creation_component__["a" /* SageCreationComponent */] },
+    { path: 'sagehome/:id/sage-profile', component: __WEBPACK_IMPORTED_MODULE_23__view_sage_profile_view_sage_profile_component__["a" /* ViewSageProfileComponent */] },
+    { path: 'sagehome/:id/universe-generator', component: __WEBPACK_IMPORTED_MODULE_8__apifetcher_form_apifetcher_form_component__["a" /* APIFetcherFormComponent */] },
+    { path: '**', component: __WEBPACK_IMPORTED_MODULE_15__page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] },
+];
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
+AppModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__apifetcher_form_apifetcher_form_component__["a" /* APIFetcherFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__welcome_form_welcome_form_component__["a" /* WelcomeFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__new_account_form_new_account_form_component__["a" /* NewAccountFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__login_form_login_form_component__["a" /* LoginFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__sage_home_sage_home_component__["a" /* SageHomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__account_settings_account_settings_component__["a" /* AccountSettingsComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__account_settings_account_change_form_account_change_form_component__["a" /* AccountChangeFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_21__delete_account_form_delete_account_form_component__["a" /* DeleteAccountFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_22__sage_creation_sage_creation_component__["a" /* SageCreationComponent */],
+            __WEBPACK_IMPORTED_MODULE_23__view_sage_profile_view_sage_profile_component__["a" /* ViewSageProfileComponent */],
+            __WEBPACK_IMPORTED_MODULE_24__sage_creation_race_selector_sub_form_race_selector_sub_form_component__["a" /* RaceSelectorSubFormComponent */]
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__["a" /* AlertModule */].forRoot(),
+            __WEBPACK_IMPORTED_MODULE_14__angular_router__["a" /* RouterModule */].forRoot(appRoutes, { enableTracing: true } // <-- debugging purposes only
+            ),
+            __WEBPACK_IMPORTED_MODULE_5_angular_font_awesome_angular_font_awesome__["a" /* AngularFontAwesomeModule */],
+        ],
+        providers: [__WEBPACK_IMPORTED_MODULE_9__apifetcher_form_apiget_fetcher_service__["a" /* APIGetFetcherService */], __WEBPACK_IMPORTED_MODULE_10__api_accounts_service__["a" /* APIAccountsService */], __WEBPACK_IMPORTED_MODULE_12__api_client_auth_service__["a" /* APIClientAuthService */], __WEBPACK_IMPORTED_MODULE_13__sage_user_service__["a" /* SageUserService */], __WEBPACK_IMPORTED_MODULE_6__tooltip__["a" /* Tooltip */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
+    })
+], AppModule);
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 318:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__ = __webpack_require__(56);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DeleteAccountFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DeleteAccountFormComponent = (function () {
+    function DeleteAccountFormComponent(router, apiAccountsService) {
+        this.router = router;
+        this.apiAccountsService = apiAccountsService;
+        this.title = '*****Sage Account Deletion*****';
+        this.subTitle = 'Remember these actions cannot be UNDONE!';
+        this.subTitle2 = '*Disclaimer*: Your real-life, AFK existence may have a slight chance of dissipating since you are removing yourself from the MULTIVERSE! SOMV holds no liability for these actions.';
+        this.sage = null;
+        this.sagename = null;
+        this.password = null;
+        this.realname = null;
+        this.error = null;
+        this.response = null;
+    }
+    DeleteAccountFormComponent.prototype.ngOnInit = function () {
+    };
+    DeleteAccountFormComponent.prototype.back = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id')]); //has to navigate and THEN trigger the broadcast singleton
+    };
+    DeleteAccountFormComponent.prototype.confirmDelete = function () {
+        var _this = this;
+        this.response = 'The Multiverse is Erasing Your Existence....';
+        this.sage = this.apiAccountsService.deleteAccount(this.sagename, this.password, this.realname);
+        this.sage.subscribe(function (data) {
+            //setNewData in Local Storage
+            _this.response = "Good News! You were successfully deleted from the Multiverse! The good news is if you are still reading this, that means you haven't dissipated!(......yet)"
+                + "Account Deleted: " + JSON.stringify(data);
+            setTimeout(function () {
+                _this.router.navigate(['welcome']);
+            }, 3000);
+        }, function (err) { return _this.error = "Sorry there was an error in deleting your account. Server Message: " + err.message + ".  Also make sure your fields are EXACTLY as you entered them when you originally created your account!"; });
+    };
+    return DeleteAccountFormComponent;
+}());
+DeleteAccountFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-delete-account-form',
+        template: __webpack_require__(461),
+        styles: [__webpack_require__(390)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__["a" /* APIAccountsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__api_accounts_service__["a" /* APIAccountsService */]) === "function" && _b || Object])
+], DeleteAccountFormComponent);
+
+var _a, _b;
+//# sourceMappingURL=delete-account-form.component.js.map
+
+/***/ }),
+
+/***/ 319:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sage_account__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__api_client_auth_service__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__sage_user_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rxjs_Subscription__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+var LoginFormComponent = (function () {
+    function LoginFormComponent(jsonPipe, apiAccountsService, apiClientAuthService, router, sageUserService) {
+        var _this = this;
+        this.jsonPipe = jsonPipe;
+        this.apiAccountsService = apiAccountsService;
+        this.apiClientAuthService = apiClientAuthService;
+        this.router = router;
+        this.sageUserService = sageUserService;
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_9_rxjs_Subscription__["Subscription"];
+        this.title = "Login to Sage Account";
+        this.sagename = null;
+        this.password = null;
+        this.response = null;
+        this.spinToggle = false;
+        this.sage = new __WEBPACK_IMPORTED_MODULE_2__sage_account__["a" /* SageAccount */];
+        this.subscription = this.apiAccountsService.getError().subscribe(function (incomingError) {
+            _this.error = "Incorrect Login";
+            _this.response = "Please Try Again.";
+        });
+    }
+    LoginFormComponent.prototype.ngOnInit = function () {
+    };
+    /**********************************************************************************************************************************
+    /* TIP: Remember when you get the password credential, the response token WILL BE tied to the user and not just the app client in general!
+    ************************************************************************************************************************************/
+    LoginFormComponent.prototype.loginToAccount = function () {
+        this.response = "Finding your way to the Multiverse......";
+        this.spinToggle = true;
+        this.apiAccountsService.login(this.sagename, this.password);
+    };
+    LoginFormComponent.prototype.test = function () {
+        //this.sage['sagename'] = 'BOB';
+        //this.sageUserService.sendSage(this.sage);
+    };
+    return LoginFormComponent;
+}());
+LoginFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-login-form',
+        template: __webpack_require__(462),
+        styles: [__webpack_require__(391)],
+        providers: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */]],
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__["a" /* APIAccountsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__["a" /* APIAccountsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__api_client_auth_service__["a" /* APIClientAuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__api_client_auth_service__["a" /* APIClientAuthService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_7__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_router__["b" /* Router */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_8__sage_user_service__["a" /* SageUserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__sage_user_service__["a" /* SageUserService */]) === "function" && _e || Object])
+], LoginFormComponent);
+
+var _a, _b, _c, _d, _e;
+//# sourceMappingURL=login-form.component.js.map
+
+/***/ }),
+
+/***/ 320:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sage_account__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sage_user_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rxjs_Subscription__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewAccountFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var NewAccountFormComponent = (function () {
+    function NewAccountFormComponent(jsonPipe, apiAccountsService, router, sageUserService) {
+        var _this = this;
+        this.jsonPipe = jsonPipe;
+        this.apiAccountsService = apiAccountsService;
+        this.router = router;
+        this.sageUserService = sageUserService;
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_8_rxjs_Subscription__["Subscription"];
+        this.title = 'Create Your New Sage Account';
+        this.newSageInfo = new __WEBPACK_IMPORTED_MODULE_2__sage_account__["a" /* SageAccount */];
+        this.sageNameError = null;
+        this.sageRequest = {
+            id: null,
+            sagename: null,
+            password: null,
+            realname: null,
+            email: null,
+            created_at: null,
+            updated_at: null
+        }; //if you don't instantiate these you get an error :/
+        this.subscription = this.apiAccountsService.getError().subscribe(function (incomingError) {
+            _this.sageNameError = "Server Error: " + incomingError.message;
+            _this.response = "Please Try Again.";
+        });
+    }
+    NewAccountFormComponent.prototype.ngOnInit = function () {
+        //this.apiAccountsService.handleError.subscribe(error => {
+        //console.log(error)
+        //this.error = error;
+        //})
+    };
+    /**
+     * Gets app authorization token from api and then uses that token to create user, then uses new user's credentials to get a new password authorization token
+     */
+    NewAccountFormComponent.prototype.createNewAccount = function () {
+        this.response = "Directing a new Sage to the Multiverse (Loading)...";
+        this.apiAccountsService.createAccount(this.sageRequest);
+    };
+    return NewAccountFormComponent;
+}());
+NewAccountFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-new-account-form',
+        template: __webpack_require__(463),
+        styles: [__webpack_require__(392)],
+        providers: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */]],
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common__["l" /* JsonPipe */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__["a" /* APIAccountsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__api_accounts_service__["a" /* APIAccountsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_7__sage_user_service__["a" /* SageUserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__sage_user_service__["a" /* SageUserService */]) === "function" && _d || Object])
+], NewAccountFormComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=new-account-form.component.js.map
+
+/***/ }),
+
+/***/ 321:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PageNotFoundComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PageNotFoundComponent = (function () {
+    function PageNotFoundComponent() {
+    }
+    PageNotFoundComponent.prototype.ngOnInit = function () {
+    };
+    return PageNotFoundComponent;
+}());
+PageNotFoundComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-page-not-found',
+        template: __webpack_require__(464),
+        styles: [__webpack_require__(393)]
+    }),
+    __metadata("design:paramtypes", [])
+], PageNotFoundComponent);
+
+//# sourceMappingURL=page-not-found.component.js.map
+
+/***/ }),
+
+/***/ 322:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__race__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tooltip__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sage_creation_service__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_router__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RaceSelectorSubFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var RaceSelectorSubFormComponent = (function () {
+    function RaceSelectorSubFormComponent(sageCreationService, router, race, tooltip) {
+        var _this = this;
+        this.sageCreationService = sageCreationService;
+        this.router = router;
+        this.race = race;
+        this.tooltip = tooltip;
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__["Subscription"];
+        this.subscription2 = new __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__["Subscription"];
+        this.isValid = false;
+        this.title = "Choose Your Race";
+        this.subTitle = "Primary Attributes";
+        this.subTitle2 = "Approximate 3D Image Representation";
+        this.attributeDescription = "Physical attributes we value such as strength and dexterity are not attributes relevant to a Sage of the Multiverse.  However, the six most important attributes that do matter to a Sage's character while transversing the Multiverse are the six \"In\'s\": Intuition, Inquisitiveness, Ingenuity, Invigoration, Intelligence, and finally the ability to not go Insane from the phenomena! Hover your cursor below (or hold your thumb over) the attribute and read the tooltip for a more complete in-game description.";
+        this.imageDescription = "The Multiverse says to you, \"My Dear Lord, since you are just a lowly human mortal living in only 4-dimensions, most of these pictures I now show you are just very poor approximations of what these 5 dimensional races would look like in your primitive 4 dimensionality (Well, 3 not counting time). In addition, to help you relate to these pictures easier, I've re-shaped most of these Sages into a humanoid shape. Just remember, humanoid is not the true shape of most of these Sages.  Irregardless, you need to find an image that you would like to represent your presence in the Multiverse.\"";
+        // isLocked;
+        this.maxRaceID = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].maxRaceID;
+        this.minRaceID = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].minRaceID;
+        this.currentRaceID = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].minRaceID;
+        this.whichImage = 1;
+        this.race.race_name = "Loading Race...";
+        this.subscription = this.sageCreationService.setRaceInfo(__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].minRaceID).subscribe(function (incomingRace) {
+            _this.race = incomingRace;
+            _this.minRaceIntuition = parseInt(_this.race.base_intuition);
+            _this.minRaceIngenuity = parseInt(_this.race.base_ingenuity);
+            _this.minRaceInquisitiveness = parseInt(_this.race.base_inquisition);
+            _this.minRaceIntelligence = parseInt(_this.race.base_intelligence);
+            _this.minRaceInvigoration = parseInt(_this.race.base_invigoration);
+            _this.minRaceInsanityControl = parseInt(_this.race.base_insanity_control);
+            _this.maxBonusPoints = parseInt(_this.race.bonus_points_at_creation);
+            _this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + _this.race.image_1;
+            // this.isLocked = this.race.is_locked;
+        });
+        this.subscription2 = this.sageCreationService.setTooltipInfo().subscribe(function (incomingTip) {
+            _this.tooltip = incomingTip;
+            console.log("Tips ready to go in form: " + JSON.stringify(_this.tooltip));
+        });
+    }
+    RaceSelectorSubFormComponent.prototype.ngOnInit = function () {
+    };
+    RaceSelectorSubFormComponent.prototype.nextRace = function () {
+        var currentRaceID = this.currentRaceID + 1;
+        //1. If the counter exceeds the max ID there is reset it to minID.
+        if (currentRaceID > this.maxRaceID) {
+            this.currentRaceID = this.minRaceID;
+        }
+        else {
+            this.currentRaceID = this.currentRaceID + 1;
+        }
+        this.switchRace();
+    };
+    RaceSelectorSubFormComponent.prototype.previousRace = function () {
+        var currentRaceID = this.currentRaceID - 1;
+        //console.log("Current RaceID: " + JSON.stringify(currentRaceID));
+        //1. If the counter exceeds the min ID there is reset it to maxID.
+        if (currentRaceID < this.minRaceID) {
+            this.currentRaceID = this.maxRaceID;
+        }
+        else {
+            this.currentRaceID = this.currentRaceID - 1;
+        }
+        this.switchRace();
+    };
+    RaceSelectorSubFormComponent.prototype.switchRace = function () {
+        var _this = this;
+        console.log("RaceID: " + JSON.stringify(this.currentRaceID)); //need to subscribe HERE to show this
+        this.subscription = this.sageCreationService.setRaceInfo(this.currentRaceID).subscribe(function (incomingRace) {
+            _this.race = incomingRace;
+            _this.minRaceIntuition = parseInt(_this.race.base_intuition);
+            _this.minRaceIngenuity = parseInt(_this.race.base_ingenuity);
+            _this.minRaceInquisitiveness = parseInt(_this.race.base_inquisition);
+            _this.minRaceIntelligence = parseInt(_this.race.base_intelligence);
+            _this.minRaceInvigoration = parseInt(_this.race.base_invigoration);
+            _this.minRaceInsanityControl = parseInt(_this.race.base_insanity_control);
+            _this.maxBonusPoints = parseInt(_this.race.bonus_points_at_creation);
+            _this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + _this.race.image_1;
+            _this.whichImage = 1;
+        });
+    };
+    RaceSelectorSubFormComponent.prototype.increaseStat = function (whichStat) {
+        var bonusPoints = parseInt(this.race.bonus_points_at_creation);
+        var intuition = parseInt(this.race.base_intuition);
+        var ingenuity = parseInt(this.race.base_ingenuity);
+        var inquisitiveness = parseInt(this.race.base_inquisition);
+        var intelligence = parseInt(this.race.base_intelligence);
+        var invigoration = parseInt(this.race.base_invigoration);
+        var insanityControl = parseInt(this.race.base_insanity_control);
+        if (whichStat == 'intuitionUp' && bonusPoints > 0) {
+            intuition = intuition + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_intuition = JSON.stringify(intuition);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'ingenuityUp' && bonusPoints > 0) {
+            ingenuity = ingenuity + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_ingenuity = JSON.stringify(ingenuity);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'inquisitivenessUp' && bonusPoints > 0) {
+            inquisitiveness = inquisitiveness + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_inquisition = JSON.stringify(inquisitiveness);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'intelligenceUp' && bonusPoints > 0) {
+            intelligence = intelligence + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_intelligence = JSON.stringify(intelligence);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'invigorationUp' && bonusPoints > 0) {
+            invigoration = invigoration + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_invigoration = JSON.stringify(invigoration);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'insanityControlUp' && bonusPoints > 0) {
+            insanityControl = insanityControl + 1;
+            bonusPoints = bonusPoints - 1;
+            this.race.base_insanity_control = JSON.stringify(insanityControl);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+    };
+    RaceSelectorSubFormComponent.prototype.decreaseStat = function (whichStat) {
+        var bonusPoints = parseInt(this.race.bonus_points_at_creation);
+        var intuition = parseInt(this.race.base_intuition);
+        var ingenuity = parseInt(this.race.base_ingenuity);
+        var inquisitiveness = parseInt(this.race.base_inquisition);
+        var intelligence = parseInt(this.race.base_intelligence);
+        var invigoration = parseInt(this.race.base_invigoration);
+        var insanityControl = parseInt(this.race.base_insanity_control);
+        if (whichStat == 'intuitionDown' && bonusPoints < this.maxBonusPoints && intuition > this.minRaceIntuition) {
+            intuition = intuition - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_intuition = JSON.stringify(intuition);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'ingenuityDown' && bonusPoints < this.maxBonusPoints && ingenuity > this.minRaceIngenuity) {
+            ingenuity = ingenuity - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_ingenuity = JSON.stringify(ingenuity);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'inquisitivenessDown' && bonusPoints < this.maxBonusPoints && inquisitiveness > this.minRaceInquisitiveness) {
+            inquisitiveness = inquisitiveness - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_inquisition = JSON.stringify(inquisitiveness);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'intelligenceDown' && bonusPoints < this.maxBonusPoints && intelligence > this.minRaceIntelligence) {
+            intelligence = intelligence - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_intelligence = JSON.stringify(intelligence);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'invigorationDown' && bonusPoints < this.maxBonusPoints && invigoration > this.minRaceInvigoration) {
+            invigoration = invigoration - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_invigoration = JSON.stringify(invigoration);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+        if (whichStat == 'insanityControlDown' && bonusPoints < this.maxBonusPoints && insanityControl > this.minRaceInsanityControl) {
+            insanityControl = insanityControl - 1;
+            bonusPoints = bonusPoints + 1;
+            this.race.base_insanity_control = JSON.stringify(insanityControl);
+            this.race.bonus_points_at_creation = JSON.stringify(bonusPoints);
+        }
+    };
+    RaceSelectorSubFormComponent.prototype.nextImage = function () {
+        this.whichImage++;
+        if (this.whichImage > __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].maxImagesPerRace) {
+            this.whichImage = 1;
+        }
+        if (this.whichImage == 1) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_1;
+        }
+        if (this.whichImage == 2) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_2;
+        }
+        if (this.whichImage == 3) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_3;
+        }
+    };
+    RaceSelectorSubFormComponent.prototype.previousImage = function () {
+        this.whichImage--;
+        if (this.whichImage < 1) {
+            this.whichImage = 3;
+        }
+        if (this.whichImage == 1) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_1;
+        }
+        if (this.whichImage == 2) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_2;
+        }
+        if (this.whichImage == 3) {
+            this.imageURL = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseImagePath + this.race.image_3;
+        }
+    };
+    RaceSelectorSubFormComponent.prototype.back = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id')]); //has to navigate and THEN trigger the broadcast singleton
+    };
+    return RaceSelectorSubFormComponent;
+}());
+RaceSelectorSubFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-race-selector-sub-form',
+        template: __webpack_require__(465),
+        styles: [__webpack_require__(394)],
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__sage_creation_service__["a" /* SageCreationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__sage_creation_service__["a" /* SageCreationService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__race__["a" /* Race */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__race__["a" /* Race */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__tooltip__["a" /* Tooltip */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__tooltip__["a" /* Tooltip */]) === "function" && _d || Object])
+], RaceSelectorSubFormComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=race-selector-sub-form.component.js.map
+
+/***/ }),
+
+/***/ 323:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sage_creation_service__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__race__ = __webpack_require__(106);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SageCreationComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var SageCreationComponent = (function () {
+    function SageCreationComponent(sageCreationService) {
+        var _this = this;
+        this.sageCreationService = sageCreationService;
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_4_rxjs_Subscription__["Subscription"];
+        this.title = 'Create Your Multiverse Sage!';
+        this.subTitle = 'Choose Your Race';
+        this.subscription = this.sageCreationService.getError().subscribe(function (incomingError) {
+            _this.error = "Couldn't Load Race Data.";
+            _this.response = "Please Make Sure You Are Logged In.";
+        });
+    }
+    SageCreationComponent.prototype.ngOnInit = function () {
+    };
+    SageCreationComponent.prototype.next = function () {
+        //this.router.navigate(['sagehome/' + localStorage.getItem('id')]);//has to navigate and THEN trigger the broadcast singleton
+    };
+    SageCreationComponent.prototype.previous = function () {
+        //this.router.navigate(['sagehome/' + localStorage.getItem('id')]);//has to navigate and THEN trigger the broadcast singleton
+    };
+    SageCreationComponent.prototype.confirm = function () {
+        //this.router.navigate(['sagehome/' + localStorage.getItem('id')]);//has to navigate and THEN trigger the broadcast singleton
+    };
+    return SageCreationComponent;
+}());
+SageCreationComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-sage-creation',
+        template: __webpack_require__(466),
+        styles: [__webpack_require__(395)],
+        providers: [__WEBPACK_IMPORTED_MODULE_3__sage_creation_service__["a" /* SageCreationService */], __WEBPACK_IMPORTED_MODULE_5__race__["a" /* Race */]]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__sage_creation_service__["a" /* SageCreationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__sage_creation_service__["a" /* SageCreationService */]) === "function" && _a || Object])
+], SageCreationComponent);
+
+var _a;
+//# sourceMappingURL=sage-creation.component.js.map
+
+/***/ }),
+
+/***/ 324:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sage_user_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subscription__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subscription___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Subscription__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SageHomeComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var SageHomeComponent = (function () {
+    function SageHomeComponent(sageUserService, router) {
+        this.sageUserService = sageUserService;
+        this.router = router;
+        this.sage = {
+            id: null,
+            sagename: null,
+            password: null,
+            realname: null,
+            email: null,
+            created_at: null,
+            updated_at: null
+        };
+        this.isValid = false;
+        this.subscription = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subscription__["Subscription"];
+        this.response = null;
+        this.subTitle = "Remember there are no card sets in SOMV: Universe Generator. Every universe card you create will be unique just for you!";
+        this.title = 'Loading...';
+        if (parseInt(localStorage.getItem('Sage_Created')) == 0) {
+            this.buttonToggle = true;
+        }
+        else {
+            this.buttonToggle = false;
+        }
+        ;
+        console.log(this.buttonToggle);
+        console.log("Sage created: " + localStorage.getItem('Sage_Created'));
+        this.title = 'Welcome Sage ' + localStorage.getItem('sagename') + ', to the Multiverse!'; //this still throws false console error for some reason
+    }
+    SageHomeComponent.prototype.ngOnInit = function () {
+    };
+    SageHomeComponent.prototype.test = function () {
+        //
+    };
+    SageHomeComponent.prototype.navigateToSettings = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id') + '/settings']);
+    };
+    SageHomeComponent.prototype.navigateToUniverseGenerator = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id') + '/universe-generator']);
+    };
+    SageHomeComponent.prototype.navigateToSageCreation = function () {
+        console.log("Current Auth Token: " + localStorage.getItem['access_token']);
+        this.router.navigate(['sagehome/' + localStorage.getItem('id') + '/sage-creation']);
+    };
+    SageHomeComponent.prototype.navigateToSageProfile = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id') + '/sage-profile']);
+    };
+    return SageHomeComponent;
+}());
+SageHomeComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-sage-home',
+        template: __webpack_require__(467),
+        styles: [__webpack_require__(396)],
+    })
+    /*In Angular it looks like data is transmitted through components completely async with subscriptions, so
+    read http://jasonwatmore.com/post/2016/12/01/angular-2-communicating-between-components-with-observable-subject and do it this way.
+    Annoying than a simple value pass, but far more powerful hopefully!*/
+    ,
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__sage_user_service__["a" /* SageUserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__sage_user_service__["a" /* SageUserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _b || Object])
+], SageHomeComponent);
+
+var _a, _b;
+//# sourceMappingURL=sage-home.component.js.map
+
+/***/ }),
+
+/***/ 325:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(23);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewSageProfileComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ViewSageProfileComponent = (function () {
+    function ViewSageProfileComponent(router) {
+        this.router = router;
+        this.title = 'Multiverse Sage Overview';
+    }
+    ViewSageProfileComponent.prototype.ngOnInit = function () {
+    };
+    ViewSageProfileComponent.prototype.back = function () {
+        this.router.navigate(['sagehome/' + localStorage.getItem('id')]); //has to navigate and THEN trigger the broadcast singleton
+    };
+    return ViewSageProfileComponent;
+}());
+ViewSageProfileComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-view-sage-profile',
+        template: __webpack_require__(468),
+        styles: [__webpack_require__(397)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object])
+], ViewSageProfileComponent);
+
+var _a;
+//# sourceMappingURL=view-sage-profile.component.js.map
+
+/***/ }),
+
+/***/ 326:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WelcomeFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var WelcomeFormComponent = (function () {
+    function WelcomeFormComponent() {
+        this.title = 'Greetings Newcomer! Are you prepared to learn the ways of the Multiverse?';
+    }
+    WelcomeFormComponent.prototype.ngOnInit = function () {
+    };
+    return WelcomeFormComponent;
+}());
+WelcomeFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* Component */])({
+        selector: 'app-welcome-form',
+        template: __webpack_require__(469),
+        styles: [__webpack_require__(398)]
+    }),
+    __metadata("design:paramtypes", [])
+], WelcomeFormComponent);
+
+//# sourceMappingURL=welcome-form.component.js.map
+
+/***/ }),
+
+/***/ 386:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 387:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 388:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 389:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 390:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 391:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 392:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 393:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 394:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "h5.noselect {\r\n  -webkit-user-select: none; /* Safari, iOS, and Android */\r\n  -moz-user-select: none; /* Firefox */\r\n  -ms-user-select: none; /* Internet Explorer/Edge */\r\n  user-select: none; /* Non-prefixed version, currently\r\n                                  supported by Chrome and Opera */\r\n}\r\n\r\ni:hover {\r\n  color: green;\r\n}\r\n\r\n.picture {\r\n  height: 20em;\r\n  max-width: 100%;\r\n  /*height: 20em; or 320px*/\r\n  border: 5px;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 395:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "body {\r\n  /* just for this demo. */\r\n  padding: 30px;\r\n}\r\n\r\n.btn {\r\n  /* just for this demo. */\r\n  margin-top: 5px;\r\n}\r\n\r\n.btn-arrow-right,\r\n.btn-arrow-left {\r\n  position: relative;\r\n  padding-left: 18px;\r\n  padding-right: 18px;\r\n}\r\n\r\n.btn-arrow-right {\r\n  padding-left: 36px;\r\n}\r\n\r\n.btn-arrow-left {\r\n  padding-right: 36px;\r\n}\r\n\r\n  .btn-arrow-right:before,\r\n  .btn-arrow-right:after,\r\n  .btn-arrow-left:before,\r\n  .btn-arrow-left:after {\r\n    /* make two squares (before and after), looking similar to the button */\r\n    content: \"\";\r\n    position: absolute;\r\n    top: 5px;\r\n    /* move it down because of rounded corners */\r\n    width: 22px;\r\n    /* same as height */\r\n    height: 22px;\r\n    /* button_outer_height / sqrt(2) */\r\n    background: inherit;\r\n    /* use parent background */\r\n    border: inherit;\r\n    /* use parent border */\r\n    border-left-color: transparent;\r\n    /* hide left border */\r\n    border-bottom-color: transparent;\r\n    /* hide bottom border */\r\n    border-radius: 0px 4px 0px 0px;\r\n    /* round arrow corner, the shorthand property doesn't accept \"inherit\" so it is set to 4px */\r\n    -webkit-border-radius: 0px 4px 0px 0px;\r\n    -moz-border-radius: 0px 4px 0px 0px;\r\n  }\r\n\r\n.btn-arrow-right:before,\r\n.btn-arrow-right:after {\r\n  transform: rotate(45deg);\r\n  /* rotate right arrow squares 45 deg to point right */\r\n  -webkit-transform: rotate(45deg);\r\n  -moz-transform: rotate(45deg);\r\n  -o-transform: rotate(45deg);\r\n  -ms-transform: rotate(45deg);\r\n}\r\n\r\n.btn-arrow-left:before,\r\n.btn-arrow-left:after {\r\n  transform: rotate(225deg);\r\n  /* rotate left arrow squares 225 deg to point left */\r\n  -webkit-transform: rotate(225deg);\r\n  -moz-transform: rotate(225deg);\r\n  -o-transform: rotate(225deg);\r\n  -ms-transform: rotate(225deg);\r\n}\r\n\r\n.btn-arrow-right:before,\r\n.btn-arrow-left:before {\r\n  /* align the \"before\" square to the left */\r\n  left: -11px;\r\n}\r\n\r\n.btn-arrow-right:after,\r\n.btn-arrow-left:after {\r\n  /* align the \"after\" square to the right */\r\n  right: -11px;\r\n}\r\n\r\n.btn-arrow-right:after,\r\n.btn-arrow-left:before {\r\n  /* bring arrow pointers to front */\r\n  z-index: 1;\r\n}\r\n\r\n.btn-arrow-right:before,\r\n.btn-arrow-left:after {\r\n  /* hide arrow tails background */\r\n  background-color: white;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 396:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 397:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 398:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 457:
+/***/ (function(module, exports) {
+
+module.exports = "<br />\r\n<div style=\"text-align: center;\" class=\"container\" *ngIf=\"subForm.showForm\">\r\n  <h4 >{{subForm.caption}}</h4>\r\n    <form [formGroup]=\"myForm\" novalidate (ngSubmit)=\"save(myForm)\">\r\n      \r\n      <div class=\"form-group\">\r\n        <!--Google how to add form controls when ready\r\n        <input class=\"form-control\" type=\"text\" [title]=\"control.toolTip\"\r\n             [attr.maxlength]=\"control.width\" [name]=\"whateverField\"\r\n             [value]=\"control.defaultValue\" [formControlName]=\"control.name\"/>\r\n            -->\r\n        <input [(ngModel)]=\"input\" type=\"text\" formControlName=\"whateverField\">\r\n        {{input}}\r\n        <small *ngIf=\"!myForm.controls.whateverField.valid\" class=\"text-danger\">\r\n          Name is required (minimum 5 characters).\r\n        </small>\r\n      </div>\r\n      <p></p><p></p><p></p>\r\n    <button type=\"button\" (click)=\"update()\" [disabled]=\"!myForm.valid\">Submit</button>\r\n      <br /><br />\r\n      <h4 style=\"color: forestgreen\">{{response}}</h4>\r\n  </form>\r\n</div>"
+
+/***/ }),
+
+/***/ 458:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">{{title}}</h2><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>\r\n<h3 style=\"text-align: center;\">{{subTitle}}</h3>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <h3>Dear Multiverse, I would like to:</h3><br />\r\n  <button type=\"button\" (click)=\"updateSageName()\">Change My Sage Name</button>\r\n  <button type=\"button\" (click)=\"updatePassword()\">Change My Password</button>\r\n  <button type=\"button\" (click)=\"updateRealName()\">Change My Real Name</button>\r\n  <button type=\"button\" (click)=\"updateEmail()\">Change My Email Address</button>\r\n\r\n  <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>\r\n\r\n  <button type=\"button\" (click)=\"delete()\">Delete Account</button>\r\n  <button type=\"button\" (click)=\"back()\">Home Page</button>\r\n  <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>\r\n  <button type=\"button\" (click)=\"test()\">Test Stuff</button>\r\n  <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>\r\n  <p style=\"color: red\">{{sageNameWarning}}</p>\r\n  <app-account-change-form [subForm]=\"subForm\"></app-account-change-form><!--Remember to bind @input shit here too for child components-->\r\n</div>"
+
+/***/ }),
+
+/***/ 459:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <label>Get Request URL: </label>\r\n  <input [(ngModel)]=\"get.url\" placeholder=\"Website URL\">\r\n\r\n  <label>Get Request Type: </label>\r\n  <select [(ngModel)]=\"get.type\">\r\n    <option value=\"HTML\">HTML</option>\r\n    <option value=\"XML\">XML</option>\r\n    <option value=\"JSON\">JSON</option>\r\n  </select>\r\n  <p></p>\r\n  <br />\r\n  <button type=\"button\" (click)=\"showData()\">Get Data</button>\r\n  <button type=\"button\" (click)=\"back()\">Home Page</button>\r\n  <br /><br />\r\n  <h4 style=\"color:blue\">{{tutorial}}</h4>\r\n</div>\r\n<br /><br />\r\n<div style=\"text-align: center;\">\r\n  <label>URL you are entering: </label>\r\n  <p id=\"for-first-test\">{{get.url}}</p>\r\n</div>\r\n<br />\r\n<label style=\"text-align: center;\">***Please note if you are running from localhost from Chrome, you need this extension: \"Allow COR origin\" at: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en or you get an error 401 with anything besides JSON, and add this to the commonly used headers: Authorization, Auth, Token, Access-Token, Access_Token, AccessToken, Code</label>\r\n<br /><br />\r\n<br /><br />\r\n<div style=\"text-align: center;\">\r\n  <label>The parsed JSON data you returned: </label>\r\n  <br /><br />\r\n  <ul>\r\n    <li >\r\n      {{returnData | json}}\r\n    </li>\r\n  </ul>\r\n  \r\n</div>\r\n<div>\r\n\r\n\r\n\r\n</div>\r\n<!--\r\n<div>\r\n  <label>The parsed data you returned </label>\r\n  <ul>\r\n    <li *ngFor=\"#obj of myArray\">\r\n      {{obj}}\r\n    </li>\r\n  </ul>\r\n</div>\r\n -->\r\n"
+
+/***/ }),
+
+/***/ 460:
+/***/ (function(module, exports) {
+
+module.exports = "<br /><br />\r\n\r\n<h1 style=\"text-align: center;\">\r\n  {{title}}\r\n</h1>\r\n<router-outlet></router-outlet>\r\n<!--<app-welcome-form></app-welcome-form>\r\n<app-apifetcher-form></app-apifetcher-form>-->"
+
+/***/ }),
+
+/***/ 461:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">{{title}}</h2><p></p>\r\n<br />\r\n<h3 style=\"text-align: center;\">{{subTitle}}</h3>\r\n<br />\r\n<h4 style=\"text-align: center;\">{{subTitle2}}</h4>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <label>Re-Enter Your Sage Name to Delete:</label><br /><br />\r\n  <input [(ngModel)]=\"sagename\" (keyup)=\"0\" placeholder=\"Sage Name\"><br />\r\n  <p>{{sagename}}</p><br />\r\n\r\n  <label>Re-Enter your Password:</label><br /><br />\r\n  <input [(ngModel)]=\"password\" (keyup)=\"0\" placeholder=\"Password\"><br />\r\n  <p>{{password}}</p><br />\r\n\r\n  <label>Re-Enter your Real Name to Delete:</label><br /><br />\r\n  <input [(ngModel)]=\"realname\" (keyup)=\"0\" placeholder=\"Real Name\"><br />\r\n  <p>{{realname}}</p><br />\r\n\r\n  <button type=\"button\" (click)=\"confirmDelete()\">I'm Sure....Delete My Sage Account</button>\r\n  <p></p><p></p>\r\n  <button type=\"button\" (click)=\"back()\">Home Page</button>\r\n  <br /><br />\r\n  <h4 style=\"color: forestgreen;\">{{response}}</h4><br />\r\n  <p style=\"color: red;\">{{error}}</p><br />\r\n</div>"
+
+/***/ }),
+
+/***/ 462:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <label>Login with your Sage Name (Remember....this is just like a \"username\")</label><br /><br />\r\n  <input [(ngModel)]=\"sagename\" (keyup)=\"0\" placeholder=\"Sage Name\"><br />\r\n  <p>{{sagename}}</p><br />\r\n\r\n  <label>Enter your Password</label><br /><br />\r\n  <input [(ngModel)]=\"password\" (keyup)=\"0\" placeholder=\"Password\"><br />\r\n  <p>{{password}}</p><br />\r\n\r\n  <button type=\"button\" (click)=\"loginToAccount()\">Login To Sage Account</button>\r\n  <button type=\"button\" routerLink=\"/welcome\" routerLinkActive=\"active\">Back</button>\r\n  <button type=\"button\" (click)=\"test()\">Test Stuff</button>\r\n  <br /><br /><br /><br /><h4>{{response}} </h4><br /><br />\r\n  <i class=\"fa fa-spinner fa-spin fa-3x\" aria-hidden=\"true\" animation=\"spin\" size=\"4x\" *ngIf=\"spinToggle\"></i>\r\n  <br />\r\n  <p style=\"color: red\">{{error}}</p>\r\n</div>"
+
+/***/ }),
+
+/***/ 463:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <input type=\"hidden\" name=\"_token\" value=\"M0ev1b4dWs6hSGEHXBWTTJYwmdfLrWWi0nfzdGuR\">\r\n  <label>Choose your Sage Name (This is just like a \"username\")</label><br /><br />\r\n  <input [(ngModel)]=\"sageRequest.sagename\" (keyup)=\"0\" placeholder=\"Sage Name\"><br />\r\n  <p>{{sageRequest.sagename}}</p>\r\n\r\n  <label>Choose your Password. (I recommend not using the same password here that you use at your bank! I don't need that kind of temptation ;))</label><br /><br />\r\n  <input [(ngModel)]=\"sageRequest.password\" (keyup)=\"0\" type=\"password\" placeholder=\"Password\"><br />\r\n  <p>{{sageRequest.password}}</p><br />\r\n\r\n  <!--\r\n  <label>Re-enter your password.</label><br /><br />\r\n  <input [(ngModel)]=\"sageAccount.password_confirm\" (keyup)=\"0\" type=\"password\" name=\"password_confirmation\" placeholder=\"Password\"><br />\r\n  <p>{{sageRequest.password_confirm}}</p><br />\r\n      -->\r\n  <label>Enter your Real First and Last Name (This is just like the first and last names on your driver's license ;P )</label><br /><br />\r\n  <input [(ngModel)]=\"sageRequest.realname\" (keyup)=\"0\" placeholder=\"First and Last Name\"><br />\r\n  <p>{{sageRequest.realname}}</p><br />\r\n\r\n  <label>Enter your email address (I have no need to contact you unless you contact me first!)</label><br /><br />\r\n  <input [(ngModel)]=\"sageRequest.email\" (keyup)=\"0\" placeholder=\"Email Address\"><br />\r\n  <p>{{sageRequest.email}}</p><br />\r\n\r\n  <button type=\"button\" (click)=\"createNewAccount()\">Create Sage Account</button>\r\n  <button type=\"button\" routerLink=\"/welcome\" routerLinkActive=\"active\">Back</button>\r\n  <br /><br />\r\n  <h4 style=\"color: forestgreen\">{{response}}</h4>\r\n  <br />\r\n  <p style=\"color: red\">{{sageNameError}}</p>\r\n  <br />\r\n  <p style=\"color: red\">{{tokenError}}</p>\r\n  <br />\r\n  <p style=\"color: red\">{{error}}</p>\r\n</div>"
+
+/***/ }),
+
+/***/ 464:
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"text-align: center;\">\r\n  <p style=\"text-align: center;\">\r\n    Navigating the Multiverse can sure be tough at times!\r\n    (Page not Found: Wrong URL)\r\n  </p><br />\r\n  <button type=\"button\" routerLink=\"/welcome\" routerLinkActive=\"active\">Back</button>\r\n</div>"
+
+/***/ }),
+
+/***/ 465:
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<i id=\"raceUp\" class=\"fa fa-chevron-circle-left fa-4x\" aria-hidden=\"true\" style=\"cursor: pointer;\" onmousedown=\"mouseDown(this.id); \"onmouseup=\"mouseUp(this.id);\" (click)=\"previousRace()\"></i>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n<i id=\"raceDown\" class=\"fa fa-chevron-circle-right fa-4x\" aria-hidden=\"true\" style=\"cursor: pointer;\" onmousedown=\"mouseDown(this.id); \"onmouseup=\"mouseUp(this.id);\" (click)=\"nextRace()\"></i>\r\n\r\n<br /><br /><br />\r\n<div class=\"tooltip\">BLAH!</div>\r\n<h1 style=\"text-align: center;\">\r\n  {{race.race_name}}\r\n</h1>\r\n<br />\r\n<h5 style=\"text-align: center;\">\r\n  Dimensionality: {{race.dimensional_wake}} creatures\r\n</h5>\r\n<br />\r\n<p style=\"color: blue;\">{{race.description}}</p>\r\n\r\n<br />\r\n<div class=\"row\">\r\n  <div class=\"col-md-6\">\r\n    <h3 style=\"text-align: center;\">\r\n      {{subTitle}}\r\n    </h3>\r\n    <p>\r\n      {{attributeDescription}}\r\n    </p>\r\n\r\n    <br />\r\n\r\n    <div style=\"text-align: right; padding-right: 45%;\">\r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          <!--I am playing with custom tooltip placement/styles-->\r\n          Intuition: {{race.base_intuition}}&nbsp;&nbsp;\r\n        </h5>\r\n        <h5>\r\n          <i id=\"intuitionUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('intuitionUp')\"></i>\r\n\r\n\r\n          <i id=\"intuitionDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('intuitionDown')\"></i>\r\n        </h5>\r\n      </div>\r\n  \r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          Ingenuity: {{race.base_ingenuity}}&nbsp;&nbsp;\r\n        </h5>\r\n        <h5>\r\n          <i id=\"ingenuityUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('ingenuityUp')\"></i>\r\n\r\n\r\n          <i id=\"ingenuityDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('ingenuityDown')\"></i>\r\n\r\n        </h5>\r\n      </div>\r\n \r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          Inquisitiveness: {{race.base_inquisition}}&nbsp;&nbsp;\r\n        </h5>\r\n        <h5>\r\n          <i id=\"inquisitivenessUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('inquisitivenessUp')\"></i>\r\n\r\n\r\n          <i id=\"inquisitivenessDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('inquisitivenessDown')\"></i>\r\n\r\n        </h5>\r\n \r\n      </div>\r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          Intelligence: {{race.base_intelligence}}&nbsp;&nbsp;\r\n\r\n        </h5>\r\n        <h5>\r\n          <i id=\"intelligenceUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('intelligenceUp')\"></i>\r\n\r\n\r\n          <i id=\"intelligenceDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('intelligenceDown')\"></i>\r\n        </h5>\r\n  \r\n      </div>\r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          Invigoration: {{race.base_invigoration}}&nbsp;&nbsp;\r\n        </h5>\r\n        <h5>\r\n          <i id=\"invigorationUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('invigorationUp')\"></i>\r\n\r\n\r\n          <i id=\"invigorationDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('invigorationDown')\"></i>\r\n\r\n        </h5>\r\n      </div>\r\n      <div class=\"row\" style=\"margin: .5em;\">\r\n\r\n        <h5 class=\"noselect\" data-toggle=\"tooltip\" title=\"Fuck you\" data-placement=\"top\">\r\n          Insanity Control: {{race.base_insanity_control}}&nbsp;&nbsp;\r\n        </h5>\r\n        <h5>\r\n          <i id=\"insanityControlUp\" class=\"fa fa-caret-square-o-up fa-stack\" style=\"cursor: pointer; margin-top: -20px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"increaseStat('insanityControlUp')\"></i>\r\n\r\n\r\n          <i id=\"insanityControlDown\" class=\"fa fa-caret-square-o-down fa-stack\" style=\"cursor: pointer; margin-top: 20px; margin-left: -5.3px; width: 0em; height: 0em; line-height: 0em;\" onmousedown=\"mouseDown(this.id);\" onmouseup=\"mouseUp(this.id);\" (click)=\"decreaseStat('insanityControlDown')\"></i>\r\n\r\n\r\n        </h5>\r\n      </div>\r\n          -->\r\n        <br /><br />\r\n      </div>\r\n      <h5 style=\"padding-right: 10%;\">Attribute Points Left To Assign: {{race.bonus_points_at_creation}}</h5>\r\n\r\n\r\n    </div>\r\n  <div class=\"col-md-6\">\r\n    <h3 style=\"text-align: center;\">\r\n      {{subTitle2}}\r\n    </h3>\r\n   \r\n\r\n    <p>\r\n      {{imageDescription}}\r\n    </p>\r\n<i id=\"picUp\" class=\"fa fa-chevron-circle-left fa-3x\" aria-hidden=\"true\" style=\"cursor: pointer;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"previousImage()\"></i>\r\n    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n<i id=\"picDown\" class=\"fa fa-chevron-circle-right fa-3x\" aria-hidden=\"true\" style=\"cursor: pointer;\" onmousedown=\"mouseDown(this.id); \" onmouseup=\"mouseUp(this.id);\" (click)=\"nextImage()\"></i>\r\n<br /><br />\r\n    <div >\r\n      <img class=\"picture\" src={{imageURL}} alt=\"Sorry, problem loading image....\">\r\n    </div>\r\n    <!--\r\n    <button type=\"button\" class=\"glyphicon glyphicon-circle-arrow-up\">Increase</button>\r\n    <button type=\"button\" class=\"glyphicon glyphicon-circle-arrow-down\">Decrease</button>\r\n    -->\r\n    <br /><br />\r\n    <br />\r\n    <h3 style=\"text-align: center;\">\r\n      Birth Universe: From The {{race.birth_universe}}\r\n    </h3>\r\n  </div>\r\n\r\n\r\n\r\n\r\n</div>\r\n<div style=\"padding-top:60px;\">\r\n  <h5 style=\"color: green;\">Racial Bonus: </h5>\r\n  <p style=\"color: green;\">{{race.racial_bonuses}}</p>\r\n  <br />\r\n  <p style=\"color: red;\" *ngIf=\"race.is_locked==1\">Sorry, you cannot play as this race at this time.</p>\r\n\r\n  <button type=\"button\" (click)=\"confirm()\" [disabled]=\"!isValid\">Confirm</button>\r\n  <button type=\"button\" (click)=\"back()\">Home Page</button>\r\n  <br /><br /><br /><br />\r\n</div>\r\n<!--\r\n  \r\n\r\n    id: string;\r\n    birth_universe: string;\r\n    race_name: string;\r\n    base_intuition: string;\r\n    base_ingenuity: string;\r\n    base_intelligence: string;\r\n    base_inquisition: string\r\n    base_invigoration: string;\r\n    base_insanity_control: string;\r\n    bonus_points_at_creation: string;\r\n    racial_bonuses: string\r\n\r\n    description: string;\r\n    personality: string;\r\n    dimensional_wake: string;\r\n    is_locked: string\r\n\r\n    is_metaphysical: string;\r\n    image_1: string;\r\n    image_2: string;\r\n    image_3: string-->"
+
+/***/ }),
+
+/***/ 466:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n\r\n<br />\r\n\r\n<br />\r\n<h2 style=\"text-align: center;\">\r\n  {{subTitle}}\r\n</h2>\r\n<br />\r\n<div style=\"text-align: center;\">\r\n  <app-race-selector-sub-form></app-race-selector-sub-form>\r\n\r\n\r\n  <h4 style=\"color: forestgreen\">{{response}}</h4>\r\n  <br />\r\n  <p style=\"color: red\">{{error}}</p>\r\n</div>"
+
+/***/ }),
+
+/***/ 467:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br /><br /><br />\r\n<div style=\"text-align: center;\">\r\n  <button type=\"button\" (click)=\"navigateToUniverseGenerator()\" routerLinkActive=\"active\">Generate New Universes</button>\r\n  <button type=\"button\" (click)=\"navigateToSageCreation()\" routerLinkActive=\"active\" *ngIf=\"buttonToggle\">Create Your Sage!</button>\r\n  <button type=\"button\" (click)=\"navigateToSageProfile()\" routerLinkActive=\"active\" *ngIf=\"!buttonToggle\">View Sage Profile</button>\r\n  <button type=\"button\" (click)=\"navigateToSettings()\" routerLinkActive=\"active\" [disabled]=\"!isValid\">Manage Multiverse Collection</button>\r\n  <button type=\"button\" (click)=\"navigateToSettings()\" routerLinkActive=\"active\" [disabled]=\"!isValid\">Trade Universes With Other Sages</button>\r\n  <button type=\"button\" (click)=\"navigateToSettings()\" routerLinkActive=\"active\" [disabled]=\"!isValid\">Start Exploring the Multiverse (Adventure Mode)</button>\r\n  <button type=\"button\" (click)=\"navigateToSettings()\" routerLinkActive=\"active\" [disabled]=\"!isValid\">Sage Duel (PVP Mode)</button>\r\n  <p></p>\r\n  <h4 style=\"color: forestgreen\">{{response}}</h4>\r\n  <p></p>\r\n  <button type=\"button\" routerLink=\"/welcome\" routerLinkActive=\"active\">Logout</button>\r\n  <button type=\"button\" (click)=\"navigateToSettings()\" routerLinkActive=\"active\">Account Settings</button>\r\n  <button type=\"button\" (click)=\"test()\">Test Stuff</button>\r\n</div>"
+
+/***/ }),
+
+/***/ 468:
+/***/ (function(module, exports) {
+
+module.exports = "<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br />\r\n\r\n<div style=\"text-align: center;\">\r\n  <button style=\"text-align: center;\" type=\"button\" (click)=\"back()\">Home Page</button>\r\n</div>"
+
+/***/ }),
+
+/***/ 469:
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<h2 style=\"text-align: center;\">\r\n  {{title}}\r\n</h2>\r\n<br />\r\n<br />\r\n\r\n<div style=\"text-align: center;\">\r\n  <h4>If you already have experience as a Sage of the Multiverse, please click the \"Login to Sage Account\" button.  If not, please click the \"Create Sage Account\" button.</h4>\r\n  <br />\r\n  <button type=\"button\" routerLink=\"/new-account\" routerLinkActive=\"active\">Create Sage Account</button>\r\n  <button type=\"button\" routerLink=\"/login\" routerLinkActive=\"active\">Login to Sage Account</button>\r\n</div>"
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_client_auth_service__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_Subject__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rxjs_Subject__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APIAccountsService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var APIAccountsService = (function () {
+    //CORS NOTE: Make sure you add "Access-Control-Allow-Origin: *" as a header or it won't work!!!!!!
+    function APIAccountsService(http, router, apiClientAuthService) {
+        this.http = http;
+        this.router = router;
+        this.apiClientAuthService = apiClientAuthService;
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+            'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Accept': 'application/json',
+        });
+        this.error = new __WEBPACK_IMPORTED_MODULE_8_rxjs_Subject__["Subject"]();
+        this.apiPasswordClient = {
+            grant_type: "password",
+            client_id: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].appID,
+            client_secret: __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].appSecret,
+            sagename: null,
+            password: null,
+            scope: "*"
+        };
+    }
+    APIAccountsService.prototype.sendError = function (error) {
+        console.log("In API Accounts Service: " + JSON.stringify(error));
+        //console.log('sendSage() ' + JSON.stringify(sage));
+        this.error.next(error);
+    };
+    APIAccountsService.prototype.clearError = function () {
+        this.error.next();
+    };
+    APIAccountsService.prototype.getError = function () {
+        //console.log('getSage() ' + JSON.stringify(this.sageSubject.asObservable));
+        return this.error.asObservable();
+    };
+    /**********************************************************************************************************
+    * 1. Generates API PASSWORD Token 2. THEN attaches headers 3. Gets User Info 4. THEN sets localStorage and navigates to Home Page
+    ************************************************************************************************************/
+    APIAccountsService.prototype.login = function (sageName, password) {
+        var _this = this;
+        console.log('SageName to LOGIN: ' + sageName + 'PASSWORD TO LOGIN: ' + password);
+        //1.
+        this.apiClientAuthService.getPasswordToken(sageName, password).subscribe(function (data) {
+            _this.responseData = data;
+            //2.
+            _this.apiLoginToken = _this.responseData;
+            console.log('my LOGIN token: ' + JSON.stringify(_this.apiLoginToken));
+            localStorage.setItem('access_token', null); //just in case if something was in there.
+            localStorage.setItem('access_token', JSON.stringify(_this.apiLoginToken['access_token']));
+            _this.headers.set('Authorization', 'Bearer ' + _this.apiLoginToken['access_token']);
+            _this.url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].baseAPIUrl + 'api/user';
+            console.log('headers being sent: ' + JSON.stringify(_this.headers));
+            console.log('url being sent: ' + _this.url);
+            //3.
+            _this.sage = _this.http.get(_this.url, { headers: _this.headers })
+                .map(function (res) { return _this.sage = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].range(1, 4))
+                .flatMap(function (_a) {
+                var error = _a[0], i = _a[1];
+                if (i > 3) {
+                    return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].throw(error.json().error || 'Server error');
+                }
+                console.log('delay retry by ' + i + ' second(s)');
+                return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].timer(i * 100);
+            }); });
+            _this.sage.subscribe(function (data) {
+                //4. Account Storage
+                localStorage.setItem('id', _this.sage.id);
+                localStorage.setItem('sagename', _this.sage.sagename);
+                localStorage.setItem('realname', _this.sage.realname);
+                localStorage.setItem('email', _this.sage.email);
+                localStorage.setItem('password', _this.sage.password); //only set password here. 
+                //5. Sage Profile Storage
+                localStorage.setItem('Sage_Created', _this.sage.Sage_Created);
+                var sageCreated = parseInt(localStorage.getItem('Sage_Created'));
+                if (sageCreated == 1) {
+                    console.log("sageCreated IF test successful: " + localStorage.getItem('Sage_Created'));
+                }
+                //console.log("Current Auth Token: " + localStorage.getItem['access_token']);
+                //console.log("SAGE CREATED TEST: " + localStorage.getItem('Sage_Created'));
+                _this.router.navigate(['sagehome', _this.sage.id]); //has to navigate and THEN trigger the broadcast singleton);
+                console.log('observing ' + JSON.stringify(_this.sage));
+            }, function (err) { return _this.sendError(err); });
+        }, function (err) { return _this.sendError(err); });
+    }; //**login(data: SageAccount, token)**//
+    /***********************************************************************************************************************************
+   * 1. Generate CCToken 2. THEN sets as header and send POST Request 3. THEN Logs User In using same login function
+   ***********************************************************************************************************************************/
+    APIAccountsService.prototype.createAccount = function (sageData) {
+        var _this = this;
+        //1.
+        this.apiClientAuthService.getClientToken().subscribe(function (data) {
+            _this.apiCCToken = data;
+            localStorage.setItem('access_token', ''); //erases anything there first
+            localStorage.setItem('access_token', _this.apiCCToken);
+            //2.
+            console.log("Access CC Token " + _this.apiCCToken['access_token']);
+            _this.headers.set('Authorization', 'Bearer ' + _this.apiCCToken['access_token']);
+            _this.url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].baseAPIUrl + 'api/account/post';
+            _this.sage = _this.http.post(_this.url, JSON.stringify(sageData), { headers: _this.headers })
+                .map(function (res) { return _this.sage = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].range(1, 4))
+                .flatMap(function (_a) {
+                var error = _a[0], i = _a[1];
+                if (i > 3) {
+                    return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].throw(error.json().error || 'Server error');
+                }
+                console.log('delay retry by ' + i + ' second(s)');
+                return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].timer(i * 100);
+            }); }); //10 retries when there are errors evades the whole preflight crap!!!! ;DDDD
+            _this.sage.subscribe(function (data) {
+                //console.log("data: " + data);
+                //3.
+                /*Caveat here:  The data comes back with the password hashed, so I cannot use the return data to jump straight into login.
+                Have to use exactly what they entered and passed into this function*/
+                _this.login(sageData.sagename, sageData.password);
+            }, function (err) { return _this.sendError(err); });
+        }, function (err) { return _this.sendError(err); });
+    }; //**createAccount(data: SageAccount, token)**//
+    /***********************************************************************************************************************************
+    * 1. Build custom request JSON string 2. make the update!
+    ***********************************************************************************************************************************/
+    APIAccountsService.prototype.updateAccount = function (formType, input) {
+        var _this = this;
+        //1.
+        var request = '{"sagename": "' + localStorage.getItem('sagename') + '", "' + formType + '": "' + input + '"}';
+        this.url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].baseAPIUrl + 'api/account/edit/' + localStorage.getItem('id');
+        var token = localStorage.getItem('access_token');
+        this.headers.set('Authorization', 'Bearer ' + token.replace('"', ''));
+        console.log(request);
+        //2.
+        this.sage = this.http.post(this.url, request, { headers: this.headers })
+            .map(function (res) { return _this.sage = res.json(); }).retryWhen(function (errors) { return errors.delay(1000).take(5); }); //10 retries when there are errors evades the whole preflight crap!!!! ;DDDD
+        return this.sage;
+    }; /**updateAccount(formType)**/
+    /***********************************************************************************************************************************
+* 1. Build custom request JSON string 2. make the deletion!
+***********************************************************************************************************************************/
+    APIAccountsService.prototype.deleteAccount = function (sagename, password, realname) {
+        var _this = this;
+        console.log(sagename + password + realname);
+        //1.
+        var request = '{"sagename": "' + sagename + '", "password": "' + password + '", "realname": "' + realname + '"}';
+        this.url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].baseAPIUrl + 'api/account/delete/' + localStorage.getItem('id');
+        var token = localStorage.getItem('access_token');
+        this.headers.set('Authorization', 'Bearer ' + token.replace('"', ''));
+        console.log(request);
+        //2.
+        this.sage = this.http.post(this.url, request, { headers: this.headers })
+            .map(function (res) { return _this.sage = res.json(); }).retryWhen(function (attempts) { return attempts.zip(__WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].range(1, 4))
+            .flatMap(function (_a) {
+            var error = _a[0], i = _a[1];
+            if (i > 3) {
+                return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].throw(error.json().error || 'Server error');
+            }
+            console.log('delay retry by ' + i + ' second(s)');
+            return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].timer(i * 100);
+        }); }); //10 retries when there are errors evades the whole preflight crap!!!! ;DDDD
+        return this.sage;
+    }; /**deleteAccount(formType)**/
+    /*
+    private getRetry(errors: Observable<Response>): Observable<any> {
+        
+        return errors.mergeMap(error => {
+            
+            if (error.status === 500) {
+                console.log(error);
+                // Add an authorization header, perhaps.
+                // ...
+                // Emit anything (the error instance, for example) to retry:
+                return Observable.of(error);
+
+            } else {
+
+                // Throw the error to give up retrying:
+                return Observable.throw(error);
+            }
+        });
+    }
+    */
+    APIAccountsService.prototype.handleError = function (error) {
+        //console.log(error);
+        return __WEBPACK_IMPORTED_MODULE_7_rxjs__["Observable"].throw(error.json().error || 'Server error');
+    };
+    APIAccountsService.prototype.sageCreatedCheck = function () {
+        //will check if sage profile has been created
+    };
+    return APIAccountsService;
+}());
+APIAccountsService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__api_client_auth_service__["a" /* APIClientAuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__api_client_auth_service__["a" /* APIClientAuthService */]) === "function" && _c || Object])
+], APIAccountsService);
+
+var _a, _b, _c;
+//# sourceMappingURL=api-accounts.service.js.map
+
+/***/ }),
+
+/***/ 57:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SageUserService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SageUserService = (function () {
+    function SageUserService() {
+        this.sageSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
+    }
+    SageUserService.prototype.sendSage = function (sage) {
+        //console.log('sendSage() ' + JSON.stringify(sage));
+        this.sageSubject.next(sage);
+    };
+    SageUserService.prototype.clearSage = function () {
+        this.sageSubject.next();
+    };
+    SageUserService.prototype.getSage = function () {
+        //console.log('getSage() ' + JSON.stringify(this.sageSubject.asObservable));
+        return this.sageSubject.asObservable();
+    };
+    return SageUserService;
+}());
+SageUserService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+    __metadata("design:paramtypes", [])
+], SageUserService);
+
+//# sourceMappingURL=sage-user.service.js.map
+
+/***/ }),
+
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+// The file contents for the current environment will overwrite these during build.
+var environment = {
+    production: false,
+    baseAPIUrl: 'https://sageofthemultiverse.com/public/',
+    tokenURL: 'https://sageofthemultiverse.com/public/oauth/token',
+    grantType: 'client_credentials',
+    appID: 71,
+    appSecret: 'bHFAwcSejLJXTplv05R1MnUUY9RUBa2TcsxjAj54',
+    scope: '*',
+    //for sage creation page. Since I'm too lazy currently to query the API for id's to have this dynamic, just remember to update these values whenever I add or delete a race from the DB.
+    minRaceID: 1001,
+    maxRaceID: 1010,
+    baseImagePath: 'assets/images/',
+    maxImagesPerRace: 3,
+};
+//# sourceMappingURL=environment.js.map
+
+/***/ }),
+
+/***/ 771:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(307);
+module.exports = __webpack_require__(302);
+
+
+/***/ }),
+
+/***/ 772:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Tooltip; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var Tooltip = (function () {
+    function Tooltip() {
+    }
+    return Tooltip;
+}());
+Tooltip = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])()
+], Tooltip);
+
+//# sourceMappingURL=tooltip.js.map
+
+/***/ })
+
+},[771]);
+//# sourceMappingURL=main.bundle.js.map

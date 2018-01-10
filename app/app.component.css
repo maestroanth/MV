@@ -1,0 +1,89 @@
+﻿.carousel {
+  z-index: -99;
+}
+  /* keeps this behind all content */
+  .carousel .item {
+    position: fixed;
+    opacity: 0;
+    left: 0 !important;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: opacity 4.5s;
+    -moz-transition: opacity 4.5s;
+    -ms-transition: opacity 4.5s;
+    -o-transition: opacity 4.5s;
+    transition: opacity 4.5s;
+  }
+  /*light-blue-wallpaper-space-1600x1200.jpg*/
+
+  .carousel .one {
+    background-image: url("../assets/images/universes/slides/Universe_Bubbles_by_Shortgreenpigg.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .two {
+    background-image: url("../assets/images/universes/slides/cool-space-planet-floating-dark-light-universe-1920x1080@.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .three {
+    background-image: url("../assets/images/universes/slides/beautiful-hd-space-1280x1024.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .four {
+    background-image: url("../assets/images/universes/slides/master_universe_by_antifan_real.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .five {
+    background-image: url("../assets/images/universes/slides/multiverse.gif");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .six {
+    background-image: url("../assets/images/universes/slides/space-planet-digital-art-mist-deviantart-1600x900@.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .seven {
+    background-image: url("../assets/images/universes/slides/earth-space-stars-world-abstract-hands-1920x1200.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .eight {
+    background-image: url("../assets/images/universes/slides/light-blue-wallpaper-space-1600x1200.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .nine {
+    background-image: url("../assets/images/universes/slides/AquaSixio-Digital-Art-57be93a1c099c__880.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+
+  .carousel .ten {
+    background-image: url("../assets/images/universes/slides/SOMV_Main.jpg");
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+  .carousel .active {
+    opacity: 1 !important;
+  }
+
+  .carousel .left {
+    opacity: 1 !important;
+    -webkit-transition: opacity 4.5s !important;
+    -moz-transition: opacity 4.5s !important;
+    -ms-transition: opacity 4.5s !important;
+    -o-transition: opacity 4.5s !important;
+    transition: opacity 4.5s !important;
+  }

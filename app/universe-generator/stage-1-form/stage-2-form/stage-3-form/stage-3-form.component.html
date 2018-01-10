@@ -1,0 +1,305 @@
+﻿<div class="stage-3-form">
+  <div style="text-align: center; max-width: 100%; width: 100%; padding: 0;" class="container transparent-layer" *ngIf="stage3Form.showForm">
+    <br /><br />
+
+    <!--Opening Model Stage 3-->
+    <div style="margin-top: -10em;" id="openingModal3" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <div class="row col-md-12 text-right">
+                <button data-dismiss="modal" class="close x-close" style="">
+                  x
+                </button>
+            </div>
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <p>
+              "Congratulations Sage! You have reached the last stage until your Universe is created! May your wisdom with balancing risks and benefits
+              guide you to grow your Universe collection and become a true Sage of the Multiverse!"
+            </p><br />
+            <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+              - Directions: This is possibly the most important Stage because this is the stage where you get to choose your abilities to use in a Duel for the Multiverse!.
+              Each Universe has a set of 1-4 battle moves (or 'phenomena/actions' you can conjure up through your flux capacitor) where at least
+              one action known is the <i>Primary Action</i> which acts as a base power generator to charge your flux capacitor.  The rest of the actions are optional 
+              to purchase and you <i> do not have to purchase every action! </i>  Once purchased, you may then buff the action which will 
+              increase it's level and make it even more potent at a cost listed in the form. This cost goes up each time you buff it.
+
+              Also, at a cost of 5 energy and an increased chance of rolling a Faulty Universe (2% increase for re-rolling the Common Slot, 3% increase
+              Uncommon Slot, and 4% increase from the Rare Slot), you may choose to re-roll the actions available in a action slot.
+            </p><br />
+
+            <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+              In addition, one you reach this stage you roll automatically at a chance of creating a <i>Perfect Universe</i>. This means that the <i>Ultimate Action</i>
+              slot becomes available for purchase!  This purchase costs no energy; however, purchasing it does increase the chance of rolling a Faulty Universe significantly.
+              If that is not enough, you may also re-roll the default Ultimate Action for another Ultimate Action in a randomly generated pool FOR FREE!
+            </p><br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12" style="box-sizing: unset;">
+      <div class="row" style="margin-right: -45px; margin-left: 20px;">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+          <h5 style="margin: 0px; white-space: nowrap;">Stage 3: The Phenomena</h5><br />
+          <h3 style="margin: 0px; white-space: nowrap;">{{stage3Form.rolledUniverse.name}}</h3>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <div class="row" style="margin-right: -45px; margin-left: 20px; margin-top: 80px;">
+        <!--PRIMARY MOVE-->
+
+        <div class="col-md-2">
+          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll()" [disabled]="true">Re-Roll All</button>
+          <h4 style="text-decoration: underline;">Primary Action </h4>
+          <h6>"{{Move1Name}}"<br /><br /></h6>
+          <h2>
+
+            Times Buffed: {{buff1Tally}}
+          </h2>
+          <button style="margin-top: 50px; margin-bottom: 20px; text-align: center;" type="button" (click)="buff(1)" [disabled]="!buff1Toggle">Buff</button>
+          <p class="cost">Energy Cost: {{buff1EnergyCost}}</p>
+          <p class="cost">Faulty Universe Increase: {{buff1FaultyIncrease}}%</p>
+        </div>
+
+        <!--MOVE 2-->
+        <div class="col-md-2">
+          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(2)" [disabled]="!reroll2Toggle">Re-Roll</button>
+          <h4 style="text-decoration: underline;">Common Action</h4>
+          <h6>
+            {{ this.selectedEntry2 | json }}
+          </h6>
+
+          <form *ngIf="purchase2Toggle">
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice1" (change)="onSelectionChange2(radioMove2Choice1)" checked> {{this.RandMoveName1[2]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice2" (change)="onSelectionChange2(radioMove2Choice2)"> {{this.RandMoveName2[2]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice3" (change)="onSelectionChange2(radioMove2Choice3)"> {{this.RandMoveName3[2]}}</label><br>
+          </form>
+
+          <div class="col-md-12" style="flex: auto; padding: 0; " *ngIf="!purchase2Toggle">
+            <h1>Purchased!</h1>
+            <h2>
+              Times Buffed: {{buff2Tally}}
+            </h2>
+            <button style="margin-top: 50px; margin-bottom: 20px; text-align: center;" type="button" (click)="buff(2)" [disabled]="!buff2Toggle">Buff</button>
+            <p class="cost">Energy Cost: {{buff2EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{buff2FaultyIncrease}}%</p>
+          </div>
+
+          <div class="col-md-12" style="flex: auto; padding: 0; margin-top: 30px;" *ngIf="purchase2Toggle">
+            <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="purchase2()" [disabled]="!purchase2Toggle">Purchase</button>
+
+            <p class="cost">Energy Cost: {{purchase2EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{purchase2FaultyIncrease}}%</p>
+
+          </div>
+        </div>
+
+        <!--MOVE 3 **Note Title and Cost footer is centered in this column. W-->
+        <div class="col-md-2">
+          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(3)" [disabled]="!reroll3Toggle">Re-Roll</button>
+
+          <h4 style="text-decoration: underline;">Uncommon Action</h4>
+          <h6>{{ this.selectedEntry3 | json }}</h6>
+          <form *ngIf="purchase3Toggle">
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice1" (change)="onSelectionChange3(radioMove3Choice1)" checked> {{this.RandMoveName1[3]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice2" (change)="onSelectionChange3(radioMove3Choice2)"> {{this.RandMoveName2[3]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice3" (change)="onSelectionChange3(radioMove3Choice3)"> {{this.RandMoveName3[3]}}</label><br>
+          </form>
+
+          <div class="col-md-12" style="flex: auto; padding: 0;" *ngIf="!purchase3Toggle">
+            <h1>Purchased!</h1>
+            <h2>
+              Times Buffed: {{buff3Tally}}
+            </h2>
+            <button style="margin-top: 50px; margin-bottom: 20px; text-align: center;" type="button" (click)="buff(3)" [disabled]="!buff3Toggle">Buff</button>
+            <p class="cost">Energy Cost: {{buff3EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{buff3FaultyIncrease}}%</p>
+          </div>
+
+          <div class="col-md-12" style="flex: auto; padding: 0; margin-top: 30px;" *ngIf="purchase3Toggle">
+            <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="purchase3()" [disabled]="!purchase3Toggle">Purchase</button>
+            <p class="cost">Energy Cost: {{purchase3EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{purchase3FaultyIncrease}}%</p>
+          </div>
+        </div>
+
+
+        <!--MOVE 4-->
+        <div class="col-md-2">
+          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(4)" [disabled]="!reroll4Toggle">Re-Roll</button>
+          <h4 style="text-decoration: underline;">Rare Action</h4>
+          <h6>{{ this.selectedEntry4 | json }}</h6>
+
+
+          <form *ngIf="purchase4Toggle">
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice1" (change)="onSelectionChange4(radioMove4Choice1)" checked> {{this.RandMoveName1[4]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice2" (change)="onSelectionChange4(radioMove4Choice2)" c> {{this.RandMoveName2[4]}}</label><br>
+            <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice3" (change)="onSelectionChange4(radioMove4Choice3)" c> {{this.RandMoveName3[4]}}</label><br>
+          </form>
+
+          <div class="col-md-12" style="flex: auto; padding: 0;" *ngIf="!purchase4Toggle">
+            <h1>Purchased!</h1>
+            <h2> Times Buffed: {{buff4Tally}}</h2>
+            <button style="margin-top: 50px; margin-bottom: 20px; text-align: center;" type="button" (click)="buff(4)" [disabled]="!buff4Toggle">Buff</button>
+            <p class="cost">Energy Cost: {{buff4EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{buff4FaultyIncrease}}%</p>
+          </div>
+          <div class="col-md-12" style="flex: auto; padding: 0; margin-top: 30px;" *ngIf="purchase4Toggle">
+            <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="purchase4()" [disabled]="!purchase4Toggle">Purchase</button>
+            <p class="cost">Energy Cost: {{purchase4EnergyCost}}</p>
+            <p class="cost">Faulty Universe Increase: {{purchase4FaultyIncrease}}%</p>
+          </div>
+        </div>
+
+
+        <!--ULTIMATE MOVE-->
+        <div class="col-md-2" *ngIf="perfectUniverse">
+          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="rerollUltimate()" [disabled]="!reroll5Toggle">Re-Roll Once For Free!</button>
+          <h4 style="text-decoration: underline; color: goldenrod;">Ultimate Action!</h4>
+          <h6>"{{MoveUltimateName}}"</h6>
+          <div class="col-md-12" style="flex: auto; padding: 0;">
+            <div class="col-md-12" style="flex: auto; padding: 0;" *ngIf="!purchase5Toggle">
+              <h1>Purchased!</h1>
+              <h2>
+                Times Buffed: {{buff5Tally}}
+              </h2>
+              <button style="margin-top: 50px; margin-bottom: 20px; text-align: center;" type="button" (click)="buff(5)" [disabled]="!buff5Toggle">Buff</button>
+              <p class="cost">Energy Cost: {{buff5EnergyCost}}</p>
+              <p class="cost">Faulty Universe Increase: {{buff5FaultyIncrease}}%</p>
+            </div>
+            <div class="col-md-12" style="flex: auto; padding: 0; margin-top: 30px;" *ngIf="purchase5Toggle">
+
+              <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="purchase5()" [disabled]="!purchase5Toggle">Purchase</button>
+              <p class="cost">Energy Cost: {{purchase5EnergyCost}}</p>
+              <p class="cost">Faulty Universe Increase: {{purchase5FaultyIncrease}}%</p>
+            </div>
+          </div>
+        </div>
+      </div><!--END OF MOVES ROW-->
+
+      <div class="row" style="margin-right: -45px; margin-left: 20px; margin-top: 30px;">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+          <div>
+            <button type="button" (click)="triggerConfirmationModel()" [disabled]="!rollUniverse">Confirm</button>
+            <div style="text-align: center; margin-top: 30px;">
+              <h5>Energy Cost: {{stage3Form.cost}} </h5><br />
+              <h5>Faulty Universe %: {{stage3Form.faultyUniverse}} </h5><br /><br />
+              <br />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+
+        <!-- Stage 3 Perfect Universe Modal -->
+        <div style="text-align: center; margin-top: -3em;">
+          <div id="perfectUniverseModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+              <div class="modal-content" style="background: none;">
+                <div class="transparent-layer-modal">
+                  <div class="row col-md-12 text-right">
+                      <button data-dismiss="modal" class="close x-close" style="">
+                        x
+                      </button>
+                  </div>
+                  <h2 style="font-size: 2.4em;">A Perfect Universe!</h2>
+                  <h4>The Multiverse says to you,</h4> <br /><br />
+                  <p>"Congratulations Sage! You made a PERFECT UNIVERSE! For a 10% <i>Faulty Universe risk</i> , you may purchase an ULTIMATE ACTION to add to your Universe card! "</p>
+                  <br />
+                  <p>"In addition, if you do not like the default choice this Universe provides, you may re-roll it once FOR FREE!"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br /><br />
+        </div>
+
+        <!-- Stage 3 Confirmation Modal -->
+        <div style="text-align: center; margin-top: -3em;">
+          <div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+              <div class="modal-content" style="background: none;">
+                <div class="transparent-layer-modal">
+                  <div class="row col-md-12 text-right">
+                      <button data-dismiss="modal" class="close x-close" style="">
+                        x
+                      </button>
+                  </div>
+                  <h4>The Multiverse says to you,</h4> <br /><br />
+                  <p>
+                    "Just to be clear my lord, you are about to create your fine-tuned Universe. The following
+                    is an estimation summary of your chances of success. If you feel like you can risk more, feel free to close this dialogue and
+                    continue to edit."
+                  </p>
+
+                  <h4>You get your finely-tuned Universe card if you roll between {{stage3Form.faultyUniverse}} and 100.</h4>
+
+                  <h4 style="margin-top: 50px; margin-bottom: 50px; -webkit-text-fill-color: white">Otherwise...</h4>
+
+                  <div *ngIf="!this.resultsToggle">
+                    <p (click)="rollUniverseCard()" style="cursor: pointer; font-weight: bold; -webkit-text-fill-color: lawngreen; -webkit-text-stroke-width: .1px;">Click HERE to see if you created your Universe!</p>
+                  </div>
+
+                  <div *ngIf="this.resultsToggle == true && this.boolFailColor == false">
+                    <p style="font-weight: bold; -webkit-text-fill-color: lawngreen; -webkit-text-stroke-width: .1px;">{{rollMessage}} </p>
+                  </div>
+
+                  <div *ngIf="this.resultsToggle == true && this.boolFailColor == true">
+                    <p style="font-weight: bold; -webkit-text-fill-color: red; -webkit-text-stroke-width: .1px;">{{rollMessage}} </p>
+                  </div>
+
+                  <div *ngIf="this.resultsToggle">
+                    <h6 style="margin-top: 30px; margin-bottom: 30px;">Click Anywhere Outside To Continue...</h6>
+                  </div>
+
+                  <input type="hidden" id="stage3Submit" (click)="cueNextForm()" *ngIf="this.resultsToggle">
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br /><br />
+        </div>
+
+        <!-- Stage 3 Error Modal -->
+        <div style="text-align: center; margin-top: -3em;">
+          <div id="errorModal3" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+              <div class="modal-content" style="background: none;">
+                <div class="transparent-layer-modal-error">
+                  <div class="row col-md-12 text-right">
+                      <button data-dismiss="modal" class="close x-close" style="">
+                        x
+                      </button>
+                  </div>
+                  <h4>The Multiverse says to you,</h4> <br /><br />
+                  <p style="font-style:italic; margin-top:-20px;">
+                    {{errorModalMessage}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br /><br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-stage-4-form [stage4Form]="stage4Form" *ngIf="stage4Form"></app-stage-4-form><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->
+<app-render-universe [renderUniverseForm]="renderUniverseForm" *ngIf="renderUniverseForm"></app-render-universe><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->

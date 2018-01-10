@@ -1,0 +1,14 @@
+$(".Language").hover(function(){$(".list").show()},function(){$(".list").hide()})
+var xxw=screen.width;
+$(".resolution span").html(screen.width+"x"+screen.height)
+$(".listpic li").hover(function(){$(this).find(".p").fadeIn()},function(){$(this).find(".p").fadeOut()})
+
+function shwofbl(){
+	$(".down-list a").each(function(){
+		if($(this).html()==screen.width+'x'+screen.height)
+		$(this).addClass("on")
+		})
+	}
+if($(".down-list").length>1){
+shwofbl();
+}

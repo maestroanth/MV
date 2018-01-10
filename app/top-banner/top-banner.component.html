@@ -1,0 +1,5 @@
+﻿<div class="top-banner">
+  <img class="logo" (click) ="home()" style="cursor: pointer;" src="../../assets/images/logo/SOMV-Logo-Version1-inverted-color.png" alt="Smiley face" >
+  <img class="logo right" (click) ="home()" style="cursor: pointer;" src="../../assets/images/logo/SOMV-Logo-Version1-inverted-color.png" alt="Smiley face">
+  <p *ngIf="this.statusMessage != 'Not Logged In'"> {{this.statusMessage}} </p>
+</div>

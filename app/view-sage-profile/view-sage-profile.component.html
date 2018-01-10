@@ -1,0 +1,172 @@
+﻿<br /><br /><br /><br />
+<div class="view-profile transparent-layer" style="margin-top: -2vw;">
+
+  <!-- Description Toggle Modal -->
+
+    <div id="descriptionModal" style="cursor: default;" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal" style="text-align: center; margin-top: -10vw;">
+            <div class="row col-md-12 text-right">
+              <button data-dismiss="modal" class="close x-close" style="">
+                x
+              </button>
+            </div>
+            <h4>Description</h4><br /><br />
+            <p style="font-style:italic;">
+              {{race.description}}
+            </p>
+            <h4 style="margin-top: 70px;">Racial Bonus: </h4>
+            <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em; margin-bottom: 50px;">
+              {{race.racial_bonuses}}
+            </p>
+            <h4 style="font-size: 1.0em"><i>(Click any of the four SOMV logos in the corners to be redirected back to the homepage after closing the dialog)</i></h4>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="dimensionalityDescriptionModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal" style="text-align: center;">
+            <div class="row col-md-12 text-right">
+              <button data-dismiss="modal" class="close x-close" style="">
+                x
+              </button>
+            </div>
+            <h4 style="">About Dimensionality...</h4> <br /><br />
+            <p>
+              {{tipDimensionalWake}}
+            </p>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-12" style="text-align: center;">
+      <h5 style="margin-top: 30px; margin-bottom: 50px;">
+        {{title}}
+      </h5>
+      <div>
+        <h4 style="margin-bottom: 20px;">
+          Universe of Origin
+        </h4>
+        <h3 style="text-align: center; margin-bottom: 20px;">
+          {{race.birth_universe}}
+        </h3>
+      </div>
+
+      <br />
+    </div>
+    <div class="row">
+      <div class="col-md-4" style="margin-top: 1%;">
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipIntuition}} placement="top" style="cursor:default;">
+            Intuition
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Intuition}}
+          </h2>
+        </div>
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipIngenuity}} placement="top" style="cursor:default;">
+            Ingenuity
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Ingenuity}}
+          </h2>
+        </div>
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipInquisitiveness}} placement="top" style="cursor:default;">
+            Inquisitiveness
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Inquisitiveness}}
+          </h2>
+        </div>
+
+      </div>
+
+      <div class="col-md-4" style="text-align: center;">
+        <div style="margin-bottom: 14px;">
+          <img style="cursor: pointer; border: solid .2vw; border-color: white; border-radius: 2vw; width: 14vw;" (click)="toggleDescription()" class="picture" src={{imageURL}} alt="Sorry, problem loading image....">
+        </div>
+
+        <div>
+          <h1 (click)="toggleDimensionalityDescription()" placement="bottom" style="text-align: center; font-size: 1.1em; white-space: normal; cursor: pointer;">
+            You Exist in {{race.dimensional_wake}}D Spacetime.
+          </h1>
+        </div>
+
+        <h1 style="margin-top: 20px;">
+          {{race.race_name}}
+        </h1>
+        <h6>
+          Level: {{sage.Level}}
+        </h6>
+
+
+      </div>
+
+      <div class="col-md-4" style="margin-top: 1%;">
+
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipIntelligence}} placement="top" style="cursor:default;">
+            Intelligence
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Intelligence}}
+          </h2>
+        </div>
+
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipInvigoration}} placement="top" style="cursor:default;">
+            Invigoration
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Invigoration}}
+          </h2>
+        </div>
+
+        <div style="color: lime; text-align: center; margin-bottom: 4.5vw;">
+          <h2 class="noselect" tooltip={{tipInsanityControl}} placement="top" style="cursor:default;">
+            Insanity Control
+          </h2>
+          <h2 class="noselect" style="cursor:default;">
+            {{sage.Insanity_Control}}
+          </h2>
+          <br />
+        </div>
+      </div>
+      <div class="col-md-12" style="text-align: center;">
+
+
+      </div>
+      <!-- Error Modal -->
+      <div style="text-align: center; margin-top: -3em;">
+        <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+            <div class="modal-content" style="background: none;">
+              <div class="transparent-layer-modal-error">
+                <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+                </div>
+                <h4>The Multiverse says to you,</h4> <br /><br />
+                <p style="font-style:italic; margin-top:-20px;">
+                  {{errorModalMessage}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br /><br />
+      </div>
+    </div>
+  </div>

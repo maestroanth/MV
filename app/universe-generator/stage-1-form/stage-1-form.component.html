@@ -1,0 +1,117 @@
+﻿<div class="stage-1-form">
+  <div style="text-align: center;" class="container transparent-layer" *ngIf="stage1Form.showForm">
+    <br /><br />
+    <h5 style="text-decoration: underline;">Stage 1: The Inflationary Period</h5><br />
+
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-4" style="margin-top: 50px;"><h3>{{universe2Name}}</h3></div>
+      <div class="col-md-4" style="color: orangered;"><h3>{{universe1Name}}</h3></div>
+      <div class="col-md-4" style="margin-top: 50px;"><h3>{{universe3Name}}</h3></div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-4"> <h4>Chance Of Occuring: {{universe2Percent}}</h4></div>
+      <div class="col-md-4" style="margin-top: -50px;"><h4>Chance Of Occuring: {{universe1Percent}}</h4></div>
+      <div class="col-md-4"><h4>Chance Of Occuring: {{universe3Percent}}</h4></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" style="margin-top: 20px; color: green; font-weight: bold;"><button type="button" (click)="increase(2)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{universe1Percent}}% and {{num}}%</h6></div>
+      <div class="col-md-4" style="margin-top: -30px;">
+        <button type="button" (click)="increase(1)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between 0% and {{universe1Percent}}%.</h6><div style="text-align: center;" class="container">
+          <h6 style="margin-top: 45px; font-size: 1.3em;">Tweaks Left: {{maxTweaks}}</h6>
+          <br />
+        </div>
+      </div>
+      <div class="col-md-4" style="margin-top: 20px; color: green; font-weight: bold;"><button type="button" (click)="increase(3)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{num}}% and 100%</h6></div>
+    </div>
+    <div style="margin-top: 0px;">
+      <button style="margin-top: 20px;" type="button" (click)="reset()" [disabled]="rollToggle">Reset</button><br /><br />
+    </div>
+    <div style="margin-top: 20px;">
+      <button style="margin-top: 20px;" type="button" (click)="roll()" [disabled]="rollToggle">Roll My Universe!!</button><br /><br />
+    </div>
+    <div style="margin-top: 20px;">
+      <h5>Energy Cost: {{this.stage2Form.cost}} </h5><br />
+      <h5>Faulty Universe %: {{this.stage2Form.faultyUniverse}} </h5><br /><br />
+    </div>
+  </div>
+
+  <!-- Stage 1 Instructions Modal -->
+  <div style="text-align: center; margin-top: 20px;">
+    <div id="openingModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <div class="row col-md-12 text-right">
+                <button data-dismiss="modal" class="close x-close" style="">
+                  x
+                </button>
+            </div>
+            <h4 style="color: lime; font-size: 2em;">The Multiverse says to you,</h4> <br /><br />
+            <p>
+              "Dear Sage, this Baby Universe has just started to grow from your website and is now in a period of inflation (Click the following link to learn more about
+              <a href="https://www.youtube.com/watch?v=rEXDgpttmyc" target="_blank"> <b style="color: yellow;"> Alan Guth's, Inflationary Theory</b></a>). However,
+              it's still young enough that you can use your Sage Energy to further tweak the odds of getting your desired Universe and guide
+              its fate!"
+            </p>
+            <br /><br />
+            <p style="color: deepskyblue; font-family: monospace; font-size: 1.3em;">
+              - Directions: Every web URL will spawn 3 different Universe possibilities. You may tweak the odds of getting a specific Universe by increasing the
+              chances of getting it by 2% increments. However, each time you increment, the chances of getting the other 2 Universes each drop by 1%.
+              Increment wisely though! Every increment increases the chance of generating a <i>failed Universe</i> (Also known as a <b>"Faulty Universe"</b>) as well as costing
+              1 Sage Energy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 1 Error Modal -->
+    <div style="text-align: center; margin-top: 20px;">
+      <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+          <div class="modal-content" style="background: none;">
+            <div class="transparent-layer-modal-error">
+              <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+              </div>
+              <h4>The Multiverse says to you,</h4> <br /><br />
+              <p style="font-style:italic; margin-top:-20px;">
+                {{errorModalMessage}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+    </div>
+
+    <!-- Stage 1 Results Modal -->
+      <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="text-align: center; margin-top: 20px;">
+        <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+          <div class="modal-content" style="background: none;">
+            <div class="transparent-layer-modal-results">
+
+              <div class="row col-md-12 text-right">
+                  <button data-dismiss="modal" class="close x-close" style="">
+                    x
+                  </button>
+              </div>
+              <h4 style="font-size: 2em; margin-bottom: -20px;">The Multiverse says to you,</h4> <br /><br />
+              <div *ngIf="!this.resultsToggle">
+                <p id=CORS (click)="rollResultToggle()" style="cursor: pointer;">Click HERE to see what Universe you rolled!</p>
+              </div>
+
+              <div *ngIf="this.resultsToggle">
+                <p style=" ">{{tweakMessage}} </p>
+                <h3 style="margin-bottom: 30px; ">{{tweakMessage3}} </h3>
+              </div>
+
+              <input type="hidden" id="stage1Submit" (click)="submit()">
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+<app-stage-2-form [stage2Form]="stage2Form" *ngIf="stage2Form"><!--do not know why .showForm does not work but this does--></app-stage-2-form><!--Remember to bind @input shit here too for child components/this is the part that does the actual @input binding-->

@@ -1,0 +1,66 @@
+﻿<br />
+<div style="text-align: center;" class="container" *ngIf="subForm.showForm">
+  <h4>{{subForm.caption}}</h4>
+  <h6 style="font-style:italic; margin-bottom: 30px; font-size: 1.3em;">{{subForm.caption2}}</h6>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+      
+      <div class="form-group" style="margin-bottom: 30px;">
+        <!--Google how to add form controls when ready
+        <input class="form-control" type="text" [title]="control.toolTip"
+             [attr.maxlength]="control.width" [name]="whateverField"
+             [value]="control.defaultValue" [formControlName]="control.name"/>
+            -->
+        <input [(ngModel)]="subForm.input" type="text" formControlName="whateverField">
+        <h5 style="margin-top: 15px;">-- {{subForm.input}} --</h5>
+        <small *ngIf="!myForm.controls.whateverField.valid" class="text-danger">
+          Name is required (minimum 5 characters).
+        </small>
+      </div>
+
+    <button style="margin-bottom: 30px;" type="button" (click)="update()" [disabled]="!myForm.valid">Submit</button>
+  </form>
+
+  <!-- Response Modal -->
+  <div style="text-align: center; margin-top: -3em;">
+    <div id="responseModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal">
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <p style="font-style:italic; margin-top:-20px;">
+              {{response}}
+            </p>
+            <h4 style="font-style:italic; margin-top:20px;">
+              {{response2}}
+            </h4>
+            <h6 style="font-style:italic; margin-top:20px; font-size: 1.4em;">
+              {{response3}}
+            </h6>
+            <h6 style="font-style:italic; margin-top:20px; font-size: 1.4em;">
+              {{response4}}
+            </h6>
+            <input type="hidden" id="responseSubmit" (click)="redirect()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+
+  <!-- Account Settings Error Modal -->
+  <div style="text-align: center; margin-top: -3em;">
+    <div id="errorModalAccountSettings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
+        <div class="modal-content" style="background: none;">
+          <div class="transparent-layer-modal-error">
+            <h4>The Multiverse says to you,</h4> <br /><br />
+            <p style="font-style:italic; margin-top:-20px;">
+              {{errorModalMessage}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+</div>

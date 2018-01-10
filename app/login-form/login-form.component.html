@@ -1,0 +1,20 @@
+﻿<div class="my-container transparent-layer">
+  <!--<ngx-loading [show]="loading" [loadingMessage]="loadingMessage"></ngx-loading>-->
+
+  <div class="login" style="margin-top: 40px; text-align: center;">
+    <h4>
+      {{title}}
+    </h4>
+
+    <div style="text-align: center; margin-top: 50px;">
+      <h6 tooltip="Remember....this is just like a 'username'" style="margin-bottom: 30px; cursor: default;">Login with your Sage Name</h6>
+      <input [(ngModel)]="sagename" (keyup)="0" placeholder="Sage Name">
+      <h5 style="margin-bottom: 50px; margin-top: 15px;">-- {{sagename}} --</h5>
+      <h6 style="margin-bottom: 30px;">Enter your Password</h6>
+      <input [(ngModel)]="password" (keyup)="0" placeholder="Password">
+      <h5 style="margin-bottom: 40px; margin-top: 15px;">-- {{password}} --</h5>
+      <button type="button" (click)="loginToAccount()">Login To Sage Account</button>
+      <h5 style="color: red; -webkit-text-fill-color: red; margin-bottom: 40px; margin-top: 30px; font-weight: 700;">{{error}}</h5>
+    </div>
+  </div>
+</div>
