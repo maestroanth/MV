@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { StatusService } from "../status.service";
 
 @Component({
   selector: 'app-buy-energy',
@@ -7,9 +8,10 @@
 })
 export class BuyEnergyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private status: StatusService) { }
 
   ngOnInit() {
+      this.status.changeStatus(" Developer Support ");
   }
   
   submitPaypalForm() {

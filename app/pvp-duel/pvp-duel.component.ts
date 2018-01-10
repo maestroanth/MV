@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { StatusService } from "../status.service";
 
 @Component({
   selector: 'app-pvp-duel',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PvpDuelComponent implements OnInit {
 
-  constructor() { }
+    constructor(private status: StatusService) { }
 
-  ngOnInit() {
+    ngOnInit() {
+        this.status.changeStatus(" Duel for the Multiverse! ");
   }
 
 }
