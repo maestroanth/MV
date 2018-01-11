@@ -488,6 +488,9 @@ button {
     margin-top: 3vw !important;
   }
 
+  .paypal-button{
+    margin-right: -30vw;
+  }
   .create-section-swap-2 {
     display: initial !important;
     max-width: -webkit-fill-available;
