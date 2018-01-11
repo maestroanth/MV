@@ -15,7 +15,7 @@ import { NgStyle } from '@angular/common';
 import { SageUserService } from '../sage-user.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LoadingMessageService } from '../loading-message.service';
-
+import { StatusService } from "../status.service";
 
 @Component({
     selector: 'app-sage-creation',
@@ -29,9 +29,10 @@ export class SageCreationComponent implements OnInit {
     //all the main form does is the error reporting..
     constructor(private loadingMessageService: LoadingMessageService, private spinnerService: Ng4LoadingSpinnerService,
         private sageUserService: SageUserService, private sageCreationService: SageCreationService, private router:
-            Router, public race: Race, private tooltip: Tooltip) {
+            Router, public race: Race, private tooltip: Tooltip, private status: StatusService) {
         this.loadingMessageService.changeLoadingMessage('Loading Creation Page...');
         this.spinnerService.show();
+        this.status.changeStatus(" Create Your Sage of the Multiverse! ");
         this.race.race_name = "Loading Race...";
 
         this.subscription = this.sageUserService.getRaceInfo(environment.minRaceID).subscribe(incomingRace => {

@@ -16,6 +16,14 @@
   border: none !important; /*gets rid of weird thin line that appears because I'm not using a header*/
 }
 
+.create-section-swap-2 {
+  display: none;
+}
+
+.create-title-swap-2 {
+  display: none;
+}
+
 .x-close {
   cursor: pointer;
   -webkit-text-fill-color: white;
@@ -451,15 +459,11 @@ button {
     width: 90%;
   }
     */
-  .create-title-swap {
-    transform: translateY(-96vw) !important;
-  }
+
 }
 
 @media only screen and (max-width : 360px) {
-  .create-title-swap {
-    transform: translateY(-106vw) !important;
-  }
+
 
   /*
   .logo {
@@ -469,13 +473,6 @@ button {
     */
 }
 
-
-@media only screen and (max-width : 1000px) {
-  /* Styles */
-  .change-image-creation{
-    margin-left: -3em;
-  }
-}
 
   /* Smartphones (portrait) ----------- */
   /*@media only screen and (max-width : 320px) {*/
@@ -489,6 +486,32 @@ button {
     font-size: 3vw !important;
     text-align: center !important;
     margin-top: 3vw !important;
+  }
+
+  .create-section-swap-2 {
+    display: initial !important;
+    max-width: -webkit-fill-available;
+    flex: auto;
+  }
+
+  .create-title-swap-2 {
+    display: initial !important;
+    max-width: -webkit-fill-available;
+    flex: auto;
+  }
+
+  .create-section-swap-3 {
+    display: initial !important;
+    max-width: -webkit-fill-available;
+    flex: auto;
+  }
+
+  .create-section-swap-1 {
+    display: none;
+  }
+
+  .create-title-swap-1 {
+    display: none;
   }
 
   .x-close, .x-close-card { /*x on upper corner of modals, Need SASS for nested classes which I prefer*/
@@ -603,11 +626,11 @@ button {
     }
 
     .create-title-swap {
-      transform: translateY(-74vw);
+      
     }
 
     .create-section-swap {
-      transform: translateY(180vw) !important;
+      
     }
 
   p {
