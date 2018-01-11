@@ -493,13 +493,13 @@ button {
 
   .x-close, .x-close-card { /*x on upper corner of modals, Need SASS for nested classes which I prefer*/
     top: -5vw;
+    -webkit-text-stroke-width: 0vw !important; /*stroke width makes x not visible at this point*/
+    -webkit-text-fill-color: dimgrey !important; /*still make it little less inconspicuous*/
     right: -11vw;
     z-index: 9999 !important;
     margin-top: 0;
     outline: none !important;
     margin-right: 0;
-
-
   }
 
   .x-close-card {
