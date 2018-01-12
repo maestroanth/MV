@@ -639,6 +639,7 @@ button {
   p {
     margin-top: 4vw !important;
     font-size: 2.3vw !important;
+    -webkit-text-stroke-width: .1vw !important;
   }
 
   /*
