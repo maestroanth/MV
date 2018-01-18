@@ -38,8 +38,8 @@
       </div>
     </div>
 
-    <div class="col-md-12" style="box-sizing: unset;">
-      <div class="row" style="margin-right: -45px; margin-left: 20px;">
+    <div class="col-md-12 collapse-box-sizing" style="box-sizing: unset;">
+      <div class="row collapse-margins" style="margin-right: -45px; margin-left: 20px;">
         <div class="col-md-2">
         </div>
         <div class="col-md-2">
@@ -54,11 +54,11 @@
         </div>
       </div>
 
-      <div class="row" style="margin-right: -45px; margin-left: 20px; margin-top: 80px;">
+      <div class="row collapse-margins" style="margin-right: -45px; margin-left: 20px; margin-top: 80px;">
         <!--PRIMARY MOVE-->
 
         <div class="col-md-2">
-          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll()" [disabled]="true">Re-Roll All</button>
+          <button class="reroll-all-toggle" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll()" [disabled]="true">Re-Roll All</button>
           <h4 style="text-decoration: underline;">Primary Action </h4>
           <h6>"{{Move1Name}}"<br /><br /></h6>
           <h2>
@@ -72,13 +72,13 @@
 
         <!--MOVE 2-->
         <div class="col-md-2">
-          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(2)" [disabled]="!reroll2Toggle">Re-Roll</button>
+          <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(2)" [disabled]="!reroll2Toggle">Re-Roll</button>
           <h4 style="text-decoration: underline;">Common Action</h4>
           <h6>
             {{ this.selectedEntry2 | json }}
           </h6>
 
-          <form *ngIf="purchase2Toggle">
+          <form class="collapse-form-margin" *ngIf="purchase2Toggle">
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice1" (change)="onSelectionChange2(radioMove2Choice1)" checked> {{this.RandMoveName1[2]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice2" (change)="onSelectionChange2(radioMove2Choice2)"> {{this.RandMoveName2[2]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move2Radio" name="move2" [value]="radioMove2Choice3" (change)="onSelectionChange2(radioMove2Choice3)"> {{this.RandMoveName3[2]}}</label><br>
@@ -105,11 +105,11 @@
 
         <!--MOVE 3 **Note Title and Cost footer is centered in this column. W-->
         <div class="col-md-2">
-          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(3)" [disabled]="!reroll3Toggle">Re-Roll</button>
+          <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(3)" [disabled]="!reroll3Toggle">Re-Roll</button>
 
           <h4 style="text-decoration: underline;">Uncommon Action</h4>
           <h6>{{ this.selectedEntry3 | json }}</h6>
-          <form *ngIf="purchase3Toggle">
+          <form class="collapse-form-margin" *ngIf="purchase3Toggle">
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice1" (change)="onSelectionChange3(radioMove3Choice1)" checked> {{this.RandMoveName1[3]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice2" (change)="onSelectionChange3(radioMove3Choice2)"> {{this.RandMoveName2[3]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input type="radio" [disabled]="!move3Radio" name="move3" [value]="radioMove3Choice3" (change)="onSelectionChange3(radioMove3Choice3)"> {{this.RandMoveName3[3]}}</label><br>
@@ -135,12 +135,12 @@
 
         <!--MOVE 4-->
         <div class="col-md-2">
-          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(4)" [disabled]="!reroll4Toggle">Re-Roll</button>
+          <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(4)" [disabled]="!reroll4Toggle">Re-Roll</button>
           <h4 style="text-decoration: underline;">Rare Action</h4>
           <h6>{{ this.selectedEntry4 | json }}</h6>
 
 
-          <form *ngIf="purchase4Toggle">
+          <form class="collapse-form-margin" *ngIf="purchase4Toggle">
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice1" (change)="onSelectionChange4(radioMove4Choice1)" checked> {{this.RandMoveName1[4]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice2" (change)="onSelectionChange4(radioMove4Choice2)" c> {{this.RandMoveName2[4]}}</label><br>
             <label tooltip="show the stats of each move here" style="cursor: pointer;"> <input [disabled]="!move4Radio" type="radio" name="move4" [value]="radioMove4Choice3" (change)="onSelectionChange4(radioMove4Choice3)" c> {{this.RandMoveName3[4]}}</label><br>
@@ -163,7 +163,7 @@
 
         <!--ULTIMATE MOVE-->
         <div class="col-md-2" *ngIf="perfectUniverse">
-          <button style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="rerollUltimate()" [disabled]="!reroll5Toggle">Re-Roll Once For Free!</button>
+          <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="rerollUltimate()" [disabled]="!reroll5Toggle">Re-Roll Once For Free!</button>
           <h4 style="text-decoration: underline; color: goldenrod;">Ultimate Action!</h4>
           <h6>"{{MoveUltimateName}}"</h6>
           <div class="col-md-12" style="flex: auto; padding: 0;">
@@ -186,7 +186,7 @@
         </div>
       </div><!--END OF MOVES ROW-->
 
-      <div class="row" style="margin-right: -45px; margin-left: 20px; margin-top: 30px;">
+      <div class="row collapse-margins" style="margin-right: -45px; margin-left: 20px; margin-top: 30px;">
         <div class="col-md-2">
         </div>
         <div class="col-md-2">

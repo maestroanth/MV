@@ -3,40 +3,50 @@
     <br /><br />
     <h5 style="text-decoration: underline;">Stage 1: The Inflationary Period</h5><br />
 
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-md-4" style="margin-top: 50px;"><h3>{{universe2Name}}</h3></div>
-      <div class="col-md-4" style="color: orangered;"><h3>{{universe1Name}}</h3></div>
-      <div class="col-md-4" style="margin-top: 50px;"><h3>{{universe3Name}}</h3></div>
-    </div>
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-md-4"> <h4>Chance Of Occuring: {{universe2Percent}}</h4></div>
-      <div class="col-md-4" style="margin-top: -50px;"><h4>Chance Of Occuring: {{universe1Percent}}</h4></div>
-      <div class="col-md-4"><h4>Chance Of Occuring: {{universe3Percent}}</h4></div>
-    </div>
-    <div class="row">
-      <div class="col-md-4" style="margin-top: 20px; color: green; font-weight: bold;"><button type="button" (click)="increase(2)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{universe1Percent}}% and {{num}}%</h6></div>
-      <div class="col-md-4" style="margin-top: -30px;">
-        <button type="button" (click)="increase(1)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between 0% and {{universe1Percent}}%.</h6><div style="text-align: center;" class="container">
-          <h6 style="margin-top: 45px; font-size: 1.3em;">Tweaks Left: {{maxTweaks}}</h6>
+    <div class="row" style="margin-top: 4.5em;">
+      <!--left block-->
+      <div class="col-md-4  left-block">
+        <div style="margin-top: 50px;"><h3>{{universe2Name}}</h3></div>
+        <div class="h4"> <h4>Chance Of Occuring: {{universe2Percent}}</h4></div>
+
+        <div style="margin-top: 1.8em; color: green; font-weight: bold;"><button type="button" (click)="increase(2)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{universe1Percent}}% and {{num}}%</h6></div>
+      </div>
+      <!--middle block-->
+      <div class="col-md-4 inside-block" style="margin-top: -50px;">
+        <div style="color: orangered;"><h3>{{universe1Name}}</h3></div>
+        <div class="h4"><h4>Chance Of Occuring: {{universe1Percent}}</h4></div>
+        <button style="margin-top: 1.4em;" type="button" (click)="increase(1)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between 0% and {{universe1Percent}}%.</h6>
+        <div style="text-align: center;" class="container tweaks-toggle-1">
+          <h6 style="margin-top: 2.5em; font-size: 1.3em;">Tweaks Left: {{maxTweaks}}</h6>
           <br />
         </div>
       </div>
-      <div class="col-md-4" style="margin-top: 20px; color: green; font-weight: bold;"><button type="button" (click)="increase(3)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{num}}% and 100%</h6></div>
+        <!--right block-->
+      <div class="col-md-4  right-block">
+        <div style="margin-top: 50px;"><h3>{{universe3Name}}</h3></div>
+        <div class="h4"><h4>Chance Of Occuring: {{universe3Percent}}</h4></div>
+        <div style="margin-top: 1.8em; color: green; font-weight: bold;"><button type="button" (click)="increase(3)" [disabled]="rollToggle">Tweak Higher</button><h6>You get this Universe if you roll between {{num}}% and 100%</h6></div>
+      </div>
     </div>
-    <div style="margin-top: 0px;">
-      <button style="margin-top: 20px;" type="button" (click)="reset()" [disabled]="rollToggle">Reset</button><br /><br />
+
+    <div class="reset-button" style="margin-top: 0px;">
+      <button style="margin-top: 1em;" type="button" (click)="reset()" [disabled]="rollToggle">Reset</button><br /><br />
     </div>
-    <div style="margin-top: 20px;">
-      <button style="margin-top: 20px;" type="button" (click)="roll()" [disabled]="rollToggle">Roll My Universe!!</button><br /><br />
+    <div style="margin-top: 1em;">
+      <button style="margin-top: 1em;" type="button" (click)="roll()" [disabled]="rollToggle">Roll My Universe!!</button><br /><br />
     </div>
-    <div style="margin-top: 20px;">
+    <div style="text-align: center;" class="container tweaks-toggle-2">
+      <h6 style="margin-top: 2.5em; font-size: 1.3em;">Tweaks Left: {{maxTweaks}}</h6>
+      <br />
+    </div>
+    <div style="margin-top: 1em;">
       <h5>Energy Cost: {{this.stage2Form.cost}} </h5><br />
       <h5>Faulty Universe %: {{this.stage2Form.faultyUniverse}} </h5><br /><br />
     </div>
   </div>
 
   <!-- Stage 1 Instructions Modal -->
-  <div style="text-align: center; margin-top: 20px;">
+  <div style="text-align: center; margin-top: 1em;">
     <div id="openingModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
         <div class="modal-content" style="background: none;">
@@ -66,7 +76,7 @@
     </div>
 
     <!-- Stage 1 Error Modal -->
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 1em;">
       <div id="errorModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
           <div class="modal-content" style="background: none;">
@@ -77,7 +87,7 @@
                   </button>
               </div>
               <h4>The Multiverse says to you,</h4> <br /><br />
-              <p style="font-style:italic; margin-top:-20px;">
+              <p style="font-style:italic; margin-top:-1em;">
                 {{errorModalMessage}}
               </p>
             </div>
@@ -88,7 +98,7 @@
     </div>
 
     <!-- Stage 1 Results Modal -->
-      <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="text-align: center; margin-top: 20px;">
+      <div id="resultsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="text-align: center; margin-top: 1em">
         <div class="modal-dialog modal-xl" role="document" id="bootstrap-override-modal-dialog">
           <div class="modal-content" style="background: none;">
             <div class="transparent-layer-modal-results">

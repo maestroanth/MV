@@ -40,58 +40,44 @@
       <div class="col-md-12" style="margin-top: 50px;">
         <h4>The Forces</h4>
         <div class="row" style="margin-top: 30px;">
+
+          <!--upper left block-->
           <div class="col-md-4">
             <h2>
-
               <i id="Force_Str_1-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_1-Up')"></i>
-
             </h2>
-          </div>
-          <div class="col-md-4">
-            <h2>
-              <i id="Force_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_2-Up')"></i>
-
-            </h2>
-          </div>
-          <div class="col-md-4">
-            <h2>
-              <i id="Force_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_3-Up')"></i>
-
-            </h2>
-          </div>
-        </div>
-        <div class="row" style="">
-          <div class="col-md-4">
             <h2 class="noselect" tooltip={{blah}} placement="left" style="display:inline-block; cursor:default;">
               <!--I am playing with custom tooltip placement/styles-->
               {{stage2Form.rolledUniverse.Force_1}}: {{stage2Form.rolledUniverse.Force_Str_1}}&nbsp;&nbsp;
             </h2>
-          </div>
-          <div class="col-md-4">
-            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: initial; cursor:default;">
-              {{stage2Form.rolledUniverse.Force_2}}: {{stage2Form.rolledUniverse.Force_Str_2}}&nbsp;&nbsp;
-            </h2>
-          </div>
-          <div class="col-md-4">
-
-            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
-              {{stage2Form.rolledUniverse.Force_3}}: {{stage2Form.rolledUniverse.Force_Str_3}}&nbsp;&nbsp;
-            </h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
             <h2>
               <i id="Force_Str_1-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_1-Down')"></i>
             </h2>
           </div>
-          <div class="col-md-4">
+
+          <!--upper inside block-->
+          <div class="col-md-4 add-margin">
+            <h2>
+              <i id="Force_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_2-Up')"></i>
+
+            </h2>
+            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: initial; cursor:default;">
+              {{stage2Form.rolledUniverse.Force_2}}: {{stage2Form.rolledUniverse.Force_Str_2}}&nbsp;&nbsp;
+            </h2>
             <h2>
               <i id="Force_Str_2-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_2-Down')"></i>
 
             </h2>
           </div>
-          <div class="col-md-4">
+
+          <!--upper right block-->
+          <div class="col-md-4 add-margin">
+            <h2>
+              <i id="Force_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Force_Str_3-Up')"></i>
+            </h2>
+            <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+              {{stage2Form.rolledUniverse.Force_3}}: {{stage2Form.rolledUniverse.Force_Str_3}}&nbsp;&nbsp;
+            </h2>
             <h2>
               <i id="Force_Str_3-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Force_Str_3-Down')"></i>
             </h2>
@@ -100,7 +86,7 @@
 
         <div class="col-md-12" style="margin-top: 50px;">
           <div class="row" style="margin-top: 30px;">
-            <button class="center-block" style="margin-right: -100px; text-align: center;" type="button" (click)="reset()" [disabled]="resetToggle">Reset</button><br />
+            <button class="center-block remove-right-margin" style="margin-right: -100px; text-align: center;" type="button" (click)="reset()" [disabled]="resetToggle">Reset</button><br />
             <button class="center-block" style="text-align: center;" type="button" (click)="reroll()" [disabled]="resetToggle">Re-Roll</button><br />
           </div>
         </div>
@@ -108,53 +94,41 @@
         <div class="col-md-12" style="margin-top: 40px;">
           <h4>The Conceptual</h4>
           <div class="row" style="margin-top: 30px;">
+
+            <!--lower left block-->
             <div class="col-md-4">
               <h2>
                 <i id="Concept_Str_1-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_1-Up')"></i>
-
               </h2>
-            </div>
-            <div class="col-md-4">
-              <h2>
-                <i id="Concept_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_2-Up')"></i>
-              </h2>
-            </div>
-            <div class="col-md-4">
-              <h2>
-                <i id="Concept_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_3-Up')"></i>
-              </h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
               <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
                 {{stage2Form.rolledUniverse.Concept_1}}: {{stage2Form.rolledUniverse.Concept_Str_1}}&nbsp;&nbsp;
               </h2>
+              <h2>
+                <i id="Concept_Str_1-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_1-Down')"></i>
+              </h2>
             </div>
-            <div class="col-md-4">
+
+            <!--lower inside block-->
+            <div class="col-md-4 add-margin">
+              <h2>
+                <i id="Concept_Str_2-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_2-Up')"></i>
+              </h2>
               <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
                 {{stage2Form.rolledUniverse.Concept_2}}: {{stage2Form.rolledUniverse.Concept_Str_2}}&nbsp;&nbsp;
               </h2>
-            </div>
-            <div class="col-md-4">
-              <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
-                {{stage2Form.rolledUniverse.Concept_3}}: {{stage2Form.rolledUniverse.Concept_Str_3}}&nbsp;&nbsp;
-              </h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <h2>
-                <i id="Concept_Str_1-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_1-Down')"></i>
-
-              </h2>
-            </div>
-            <div class="col-md-4">
               <h2>
                 <i id="Concept_Str_2-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_2-Down')"></i>
               </h2>
             </div>
-            <div class="col-md-4">
+
+            <!--lower right block-->
+            <div class="col-md-4 add-margin">
+              <h2>
+                <i id="Concept_Str_3-Up" class="fa fa-chevron-up fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id);" onmouseup="mouseUp(this.id);" (click)="increaseStat('Concept_Str_3-Up')"></i>
+              </h2>
+              <h2 class="noselect" tooltip={{blah}} placement="left" style="display: inline; cursor:default;">
+                {{stage2Form.rolledUniverse.Concept_3}}: {{stage2Form.rolledUniverse.Concept_Str_3}}&nbsp;&nbsp;
+              </h2>
               <h2>
                 <i id="Concept_Str_3-Down" class="fa fa-chevron-down fa-stack" style="cursor: pointer;" onmousedown="mouseDown(this.id); " onmouseup="mouseUp(this.id);" (click)="decreaseStat('Concept_Str_3-Down')"></i>
               </h2>
