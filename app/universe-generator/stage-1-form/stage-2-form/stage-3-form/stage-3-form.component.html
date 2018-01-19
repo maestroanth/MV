@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-2">
           <h5 style="margin: 0px; white-space: nowrap;">Stage 3: The Phenomena</h5><br />
-          <h3 style="margin: 0px; white-space: nowrap;">{{stage3Form.rolledUniverse.name}}</h3>
+          <h3 class="adjust-h3-margin-in-betweeen"style="margin: 0px; white-space: nowrap;">{{stage3Form.rolledUniverse.name}}</h3>
         </div>
         <div class="col-md-2">
         </div>
@@ -57,7 +57,7 @@
       <div class="row collapse-margins" style="margin-right: -45px; margin-left: 20px; margin-top: 80px;">
         <!--PRIMARY MOVE-->
 
-        <div class="col-md-2">
+        <div class="col-md-2 give-margin">
           <button class="reroll-all-toggle" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll()" [disabled]="true">Re-Roll All</button>
           <h4 style="text-decoration: underline;">Primary Action </h4>
           <h6>"{{Move1Name}}"<br /><br /></h6>
@@ -71,7 +71,7 @@
         </div>
 
         <!--MOVE 2-->
-        <div class="col-md-2">
+        <div class="col-md-2 give-margin">
           <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(2)" [disabled]="!reroll2Toggle">Re-Roll</button>
           <h4 style="text-decoration: underline;">Common Action</h4>
           <h6>
@@ -104,7 +104,7 @@
         </div>
 
         <!--MOVE 3 **Note Title and Cost footer is centered in this column. W-->
-        <div class="col-md-2">
+        <div class="col-md-2 give-margin">
           <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(3)" [disabled]="!reroll3Toggle">Re-Roll</button>
 
           <h4 style="text-decoration: underline;">Uncommon Action</h4>
@@ -134,7 +134,7 @@
 
 
         <!--MOVE 4-->
-        <div class="col-md-2">
+        <div class="col-md-2 give-margin">
           <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="reroll(4)" [disabled]="!reroll4Toggle">Re-Roll</button>
           <h4 style="text-decoration: underline;">Rare Action</h4>
           <h6>{{ this.selectedEntry4 | json }}</h6>
@@ -162,7 +162,7 @@
 
 
         <!--ULTIMATE MOVE-->
-        <div class="col-md-2" *ngIf="perfectUniverse">
+        <div class="col-md-2 give-margin" *ngIf="perfectUniverse">
           <button class="reroll-add-margin" style="margin-top: 20px; margin-bottom: 20px; text-align: center;" type="button" (click)="rerollUltimate()" [disabled]="!reroll5Toggle">Re-Roll Once For Free!</button>
           <h4 style="text-decoration: underline; color: goldenrod;">Ultimate Action!</h4>
           <h6>"{{MoveUltimateName}}"</h6>

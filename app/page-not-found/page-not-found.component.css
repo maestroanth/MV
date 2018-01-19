@@ -36,3 +36,9 @@ p {
   padding-right: 20px;
   padding-bottom: 20px;
 }
+
+@media only screen and (max-width : 976px) {
+  p {
+    -webkit-text-stroke-width: 0vw !important;
+  }
+}
